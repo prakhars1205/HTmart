@@ -1,0 +1,59 @@
+:root {
+  /* Brand colors */
+  --bg: #150E1D;
+  --section: #1D1429;
+  --card: #261A33;
+  --hover: #322343;
+  --white: #FAFAF8;
+  --muted: #9A93A8;
+  --orange: #F7774A;
+  --coral: #ED4B57;
+  --gradient: linear-gradient(135deg, #F7774A 0%, #ED4B57 100%);
+  --success: #34C77B;
+  --error: #ED4B57;
+
+  /* Text on accent buttons (always dark plum, never white) */
+  --on-accent: #261A33;
+
+  /* Borders / overlays */
+  --border: rgba(250,250,248,0.08);
+  --border-strong: rgba(250,250,248,0.16);
+  --orange-light: rgba(247,119,74,0.12);
+  --orange-mid: rgba(247,119,74,0.22);
+
+  /* Shadows */
+  --shadow: 0 4px 32px rgba(0,0,0,0.35);
+  --shadow-lg: 0 16px 64px rgba(0,0,0,0.45);
+
+  /* Nav background (translucent, blurred) */
+  --nav-bg: rgba(21,14,29,0.85);
+
+  /* Fonts */
+  --font-heading: 'Syne', sans-serif;
+  --font-body: 'DM Sans', sans-serif;
+}
+
+/* ============================================================
+   LIGHT THEME
+   Toggled via [data-theme="light"] on <html>
+   Orange/coral accents and their dark-plum button text (--on-accent)
+   stay the same in both themes.
+   ============================================================ */
+:root[data-theme="light"] {
+  --bg: #FAFAF8;
+  --section: #F4EFF7;
+  --card: #FFFFFF;
+  --hover: #EDE6F3;
+  --white: #261A33;
+  --muted: #756C87;
+
+  --border: rgba(38,26,51,0.08);
+  --border-strong: rgba(38,26,51,0.16);
+  --orange-light: rgba(247,119,74,0.10);
+  --orange-mid: rgba(247,119,74,0.20);
+
+  --shadow: 0 4px 32px rgba(38,26,51,0.08);
+  --shadow-lg: 0 16px 64px rgba(38,26,51,0.12);
+
+  --nav-bg: rgba(250,250,248,0.85);
+}

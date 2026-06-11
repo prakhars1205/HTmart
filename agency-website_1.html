@@ -1,0 +1,1536 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HT Mart — Creative Content That Converts</title>
+<link href="https://fonts.googleapis.com/css2?family=Clash+Display:wght@400;500;600;700&family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --orange: #FE6C44;
+  --purple: #281936;
+  --white: #FFFFFF;
+  --off-white: #FDF8F5;
+  --cream: #FFF4EE;
+  --light-gray: #F5F0EB;
+  --text: #1A1018;
+  --text-muted: #7A6E78;
+  --text-light: #B0A8AE;
+  --orange-light: rgba(254,108,68,0.08);
+  --orange-mid: rgba(254,108,68,0.15);
+  --purple-light: rgba(40,25,54,0.06);
+  --shadow: 0 4px 32px rgba(40,25,54,0.08);
+  --shadow-lg: 0 16px 64px rgba(40,25,54,0.12);
+}
+
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+  background:var(--white);
+  color:var(--text);
+  font-family:'DM Sans',sans-serif;
+  font-size:16px;
+  line-height:1.6;
+  overflow-x:hidden;
+  cursor:none;
+}
+
+/* CURSOR */
+.cursor{width:10px;height:10px;background:var(--orange);border-radius:50%;position:fixed;top:0;left:0;pointer-events:none;z-index:99999;transform:translate(-50%,-50%);transition:width .2s,height .2s,background .2s;}
+.cursor-ring{width:38px;height:38px;border:1.5px solid var(--orange);border-radius:50%;position:fixed;top:0;left:0;pointer-events:none;z-index:99998;transform:translate(-50%,-50%);transition:width .2s,height .2s,opacity .2s,border-color .2s;opacity:0.5;}
+.cursor.hovered{width:18px;height:18px;background:var(--purple);}
+.cursor-ring.hovered{width:52px;height:52px;border-color:var(--purple);opacity:0.25;}
+
+/* PAGE SYSTEM */
+.page{display:none;min-height:100vh;animation:pageIn .4s ease both;}
+.page.active{display:block;}
+@keyframes pageIn{from{opacity:0;transform:translateY(12px);}to{opacity:1;transform:translateY(0);}}
+
+/* NAV */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:1000;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 56px;height:72px;
+  background:rgba(255,255,255,0.92);
+  backdrop-filter:blur(20px);
+  border-bottom:1px solid rgba(40,25,54,0.06);
+  transition:box-shadow .3s;
+}
+nav.scrolled{box-shadow:0 2px 24px rgba(40,25,54,0.08);}
+
+.logo-wrap{display:flex;align-items:center;gap:10px;text-decoration:none;}
+.logo-icon{
+  width:38px;height:38px;
+  background:var(--orange);
+  border-radius:10px;
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Syne',sans-serif;font-weight:800;font-size:15px;color:#fff;
+  letter-spacing:-0.5px;
+}
+.logo-text{font-family:'Syne',sans-serif;font-weight:800;font-size:18px;color:var(--purple);letter-spacing:-0.5px;}
+.logo-text span{color:var(--orange);}
+
+.nav-links{display:flex;align-items:center;gap:32px;list-style:none;}
+.nav-links a{color:var(--text-muted);text-decoration:none;font-size:14px;font-weight:500;transition:color .2s;cursor:none;position:relative;}
+.nav-links a::after{content:'';position:absolute;bottom:-4px;left:0;right:0;height:2px;background:var(--orange);transform:scaleX(0);transition:transform .25s ease;}
+.nav-links a:hover,.nav-links a.active{color:var(--text);}
+.nav-links a:hover::after,.nav-links a.active::after{transform:scaleX(1);}
+.nav-cta{background:var(--orange)!important;color:#fff!important;padding:10px 24px;border-radius:100px;font-weight:600!important;transition:transform .2s,box-shadow .2s!important;}
+.nav-cta::after{display:none!important;}
+.nav-cta:hover{transform:translateY(-2px)!important;box-shadow:0 8px 24px rgba(254,108,68,0.4)!important;}
+
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:none;border:none;background:none;padding:4px;}
+.hamburger span{width:22px;height:2px;background:var(--purple);border-radius:2px;display:block;transition:all .3s;}
+
+/* MOBILE NAV */
+.mobile-nav{display:none;position:fixed;inset:0;background:var(--purple);z-index:9000;flex-direction:column;align-items:center;justify-content:center;gap:28px;}
+.mobile-nav.open{display:flex;}
+.mobile-nav a{font-family:'Syne',sans-serif;font-size:40px;font-weight:800;color:#fff;text-decoration:none;cursor:none;transition:color .2s;}
+.mobile-nav a:hover{color:var(--orange);}
+.mobile-close{position:absolute;top:24px;right:28px;background:none;border:none;color:#fff;font-size:28px;cursor:none;}
+
+/* SCROLL REVEAL */
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .7s ease,transform .7s ease;}
+.reveal.visible{opacity:1;transform:translateY(0);}
+
+/* SHARED SECTION STYLES */
+.section-tag{display:inline-flex;align-items:center;gap:8px;font-size:11px;letter-spacing:.15em;text-transform:uppercase;font-weight:700;color:var(--orange);margin-bottom:18px;}
+.section-tag::before{content:'';width:24px;height:2px;background:var(--orange);border-radius:2px;}
+.section-heading{font-family:'Syne',sans-serif;font-weight:800;letter-spacing:-2px;line-height:1.05;}
+.btn-primary{display:inline-flex;align-items:center;gap:10px;background:var(--orange);color:#fff;font-family:'Syne',sans-serif;font-weight:700;font-size:14px;padding:14px 28px;border-radius:100px;text-decoration:none;border:none;cursor:none;transition:transform .2s,box-shadow .2s;}
+.btn-primary:hover{transform:translateY(-3px);box-shadow:0 10px 28px rgba(254,108,68,0.4);}
+.btn-primary .arr{width:22px;height:22px;background:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;color:var(--orange);font-size:13px;font-weight:700;transition:transform .2s;}
+.btn-primary:hover .arr{transform:rotate(45deg);}
+.btn-outline{display:inline-flex;align-items:center;gap:8px;border:1.5px solid var(--purple);color:var(--purple);font-family:'Syne',sans-serif;font-weight:700;font-size:14px;padding:13px 28px;border-radius:100px;text-decoration:none;cursor:none;transition:all .2s;}
+.btn-outline:hover{background:var(--purple);color:#fff;}
+
+/* ============================================================
+   HOME PAGE
+   ============================================================ */
+#home{}
+
+/* HERO */
+.hero{
+  min-height:100vh;
+  padding:120px 56px 80px;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:60px;
+  align-items:center;
+  background:var(--off-white);
+  position:relative;
+  overflow:hidden;
+}
+.hero::before{
+  content:'';
+  position:absolute;
+  width:600px;height:600px;
+  border-radius:50%;
+  background:radial-gradient(circle,rgba(254,108,68,0.12) 0%,transparent 70%);
+  right:-100px;top:-100px;
+  pointer-events:none;
+}
+.hero-left{position:relative;z-index:2;}
+.hero-badge{
+  display:inline-flex;align-items:center;gap:8px;
+  background:#fff;border:1px solid rgba(254,108,68,0.25);
+  color:var(--orange);font-size:12px;font-weight:600;
+  padding:8px 18px;border-radius:100px;
+  margin-bottom:28px;
+  box-shadow:0 2px 12px rgba(254,108,68,0.1);
+  animation:fadeUp .8s ease both;
+}
+.hero-badge .pulse{width:7px;height:7px;background:var(--orange);border-radius:50%;animation:pulseAnim 2s ease infinite;}
+@keyframes pulseAnim{0%,100%{opacity:1;transform:scale(1);}50%{opacity:.4;transform:scale(1.6);}}
+
+.hero h1{
+  font-family:'Syne',sans-serif;
+  font-size:clamp(48px,5.5vw,78px);
+  font-weight:800;letter-spacing:-3px;line-height:.96;
+  color:var(--purple);
+  animation:fadeUp .8s ease .1s both;
+}
+.hero h1 .highlight{color:var(--orange);display:block;}
+.hero h1 .stroke{
+  -webkit-text-stroke:2px var(--purple);
+  color:transparent;display:block;
+}
+
+.hero-desc{
+  font-size:17px;color:var(--text-muted);
+  max-width:440px;margin:28px 0 40px;
+  font-weight:300;line-height:1.8;
+  animation:fadeUp .8s ease .2s both;
+}
+.hero-actions{display:flex;gap:14px;align-items:center;flex-wrap:wrap;animation:fadeUp .8s ease .3s both;}
+
+.hero-right{position:relative;z-index:2;}
+.hero-visual-card{
+  background:#fff;
+  border-radius:24px;
+  overflow:hidden;
+  box-shadow:var(--shadow-lg);
+  border:1px solid rgba(40,25,54,0.06);
+  animation:fadeUp .8s ease .2s both;
+}
+.hero-video-placeholder{
+  width:100%;height:320px;
+  background:var(--purple);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:16px;
+  position:relative;
+  overflow:hidden;
+}
+.hero-video-placeholder::before{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(135deg,rgba(254,108,68,0.2) 0%,transparent 60%);
+}
+.play-btn{
+  width:64px;height:64px;
+  background:var(--orange);border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-size:24px;color:#fff;
+  position:relative;z-index:1;
+  transition:transform .3s,box-shadow .3s;
+  cursor:none;
+}
+.play-btn:hover{transform:scale(1.1);box-shadow:0 8px 32px rgba(254,108,68,0.5);}
+.play-btn::after{
+  content:'';position:absolute;
+  width:80px;height:80px;border:2px solid rgba(254,108,68,0.4);
+  border-radius:50%;animation:ripple 2s ease infinite;
+}
+@keyframes ripple{0%{transform:scale(1);opacity:1;}100%{transform:scale(1.6);opacity:0;}}
+
+.hero-video-label{color:rgba(255,255,255,0.6);font-size:13px;font-weight:500;position:relative;z-index:1;}
+.hero-card-bottom{padding:20px 24px;display:flex;align-items:center;justify-content:space-between;}
+.hero-card-meta{font-size:13px;color:var(--text-muted);}
+.hero-card-meta strong{color:var(--purple);font-weight:700;display:block;font-size:15px;}
+.hero-card-tag{background:var(--orange-light);color:var(--orange);font-size:11px;font-weight:700;padding:6px 14px;border-radius:100px;letter-spacing:.05em;}
+
+.hero-stats{display:flex;gap:24px;margin-top:20px;}
+.hero-stat{background:#fff;border-radius:16px;padding:16px 20px;flex:1;box-shadow:0 2px 16px rgba(40,25,54,0.06);border:1px solid rgba(40,25,54,0.04);}
+.hero-stat-num{font-family:'Syne',sans-serif;font-weight:800;font-size:26px;color:var(--purple);letter-spacing:-1px;line-height:1;}
+.hero-stat-num span{color:var(--orange);}
+.hero-stat-label{font-size:12px;color:var(--text-muted);margin-top:4px;}
+
+@keyframes fadeUp{from{opacity:0;transform:translateY(18px);}to{opacity:1;transform:translateY(0);}}
+
+/* MARQUEE */
+.marquee-wrap{
+  background:var(--purple);
+  overflow:hidden;
+  padding:14px 0;
+}
+.marquee-track{display:flex;gap:0;animation:marqueeAnim 22s linear infinite;width:max-content;}
+.marquee-item{display:flex;align-items:center;gap:16px;padding:0 28px;font-family:'Syne',sans-serif;font-size:13px;font-weight:600;color:rgba(255,255,255,0.4);letter-spacing:.08em;text-transform:uppercase;white-space:nowrap;}
+.marquee-item .dot{color:var(--orange);font-size:18px;}
+@keyframes marqueeAnim{0%{transform:translateX(0);}100%{transform:translateX(-50%);}}
+
+/* SERVICES SECTION */
+.services-home{padding:100px 56px;}
+.services-header{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:56px;flex-wrap:wrap;gap:24px;}
+.services-header .section-heading{font-size:clamp(36px,4vw,58px);}
+.services-home-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;}
+
+.svc-card{
+  background:var(--off-white);
+  border-radius:20px;
+  padding:36px 32px;
+  border:1px solid rgba(40,25,54,0.06);
+  cursor:none;
+  transition:transform .3s,box-shadow .3s,background .3s;
+  position:relative;overflow:hidden;
+}
+.svc-card::before{
+  content:'';position:absolute;
+  bottom:0;left:0;right:0;height:3px;
+  background:var(--orange);
+  transform:scaleX(0);transform-origin:left;
+  transition:transform .35s ease;
+}
+.svc-card:hover{transform:translateY(-6px);box-shadow:var(--shadow-lg);background:#fff;}
+.svc-card:hover::before{transform:scaleX(1);}
+.svc-icon{
+  width:52px;height:52px;
+  background:var(--orange-light);
+  border-radius:14px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:26px;margin-bottom:22px;
+  transition:transform .3s;
+}
+.svc-card:hover .svc-icon{transform:rotate(-8deg) scale(1.1);}
+.svc-card h3{font-family:'Syne',sans-serif;font-size:19px;font-weight:700;color:var(--purple);margin-bottom:10px;letter-spacing:-.5px;}
+.svc-card p{color:var(--text-muted);font-size:14px;line-height:1.75;}
+.svc-arrow{
+  margin-top:24px;
+  width:36px;height:36px;
+  border:1.5px solid rgba(40,25,54,0.12);
+  border-radius:50%;display:flex;align-items:center;justify-content:center;
+  color:var(--text-muted);font-size:16px;
+  transition:all .3s;
+}
+.svc-card:hover .svc-arrow{background:var(--orange);border-color:var(--orange);color:#fff;transform:rotate(45deg);}
+
+/* PORTFOLIO SECTION HOME */
+.portfolio-home{padding:0 56px 100px;}
+.portfolio-home-header{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:48px;flex-wrap:wrap;gap:24px;}
+.portfolio-home-header .section-heading{font-size:clamp(36px,4vw,58px);}
+
+.portfolio-home-grid{display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:auto auto;gap:20px;}
+
+.port-card{
+  border-radius:20px;overflow:hidden;
+  cursor:none;position:relative;
+  transition:transform .3s,box-shadow .3s;
+  background:var(--purple);
+}
+.port-card:hover{transform:scale(1.02);box-shadow:var(--shadow-lg);}
+.port-card.large{grid-column:span 2;grid-row:span 1;}
+.port-card.tall{grid-row:span 2;}
+
+.port-video{
+  width:100%;aspect-ratio:16/9;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  position:relative;overflow:hidden;min-height:200px;
+}
+.port-card.tall .port-video{aspect-ratio:auto;min-height:400px;}
+.port-card.large .port-video{min-height:240px;}
+
+.port-gradient-1{background:linear-gradient(135deg,#1a0b2e 0%,#3d1560 100%);}
+.port-gradient-2{background:linear-gradient(135deg,#0d1f3c 0%,#1a4480 100%);}
+.port-gradient-3{background:linear-gradient(135deg,#2d0e0e 0%,#8b2020 100%);}
+.port-gradient-4{background:linear-gradient(135deg,#0e2d1a 0%,#1a6b35 100%);}
+.port-gradient-5{background:linear-gradient(135deg,#2d1a00 0%,#8b5a00 100%);}
+
+.port-overlay-icon{font-size:80px;opacity:.12;position:absolute;}
+.port-play{
+  width:56px;height:56px;background:var(--orange);border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  color:#fff;font-size:20px;position:relative;z-index:2;
+  transition:transform .3s,box-shadow .3s;
+}
+.port-card:hover .port-play{transform:scale(1.15);box-shadow:0 8px 28px rgba(254,108,68,0.5);}
+.port-play::after{
+  content:'';position:absolute;
+  width:70px;height:70px;
+  border:2px solid rgba(254,108,68,0.4);
+  border-radius:50%;
+  animation:ripple 2s ease infinite;
+}
+.port-info{
+  padding:20px 24px;
+  background:#fff;
+}
+.port-cat{font-size:11px;letter-spacing:.12em;text-transform:uppercase;font-weight:700;color:var(--orange);margin-bottom:6px;}
+.port-title{font-family:'Syne',sans-serif;font-weight:700;font-size:17px;color:var(--purple);letter-spacing:-.3px;}
+.port-click-hint{
+  position:absolute;top:16px;right:16px;
+  background:rgba(255,255,255,0.15);
+  backdrop-filter:blur(8px);
+  color:#fff;font-size:11px;font-weight:600;
+  padding:6px 12px;border-radius:100px;
+  letter-spacing:.05em;
+  opacity:0;transition:opacity .3s;
+}
+.port-card:hover .port-click-hint{opacity:1;}
+
+/* TESTIMONIALS */
+.testimonials{padding:0 56px 100px;}
+.testi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:52px;}
+.testi-card{
+  background:var(--off-white);
+  border-radius:20px;padding:32px;
+  border:1px solid rgba(40,25,54,0.06);
+}
+.testi-stars{color:var(--orange);font-size:18px;margin-bottom:16px;letter-spacing:2px;}
+.testi-text{color:var(--text);font-size:15px;line-height:1.8;font-style:italic;margin-bottom:24px;}
+.testi-text::before{content:'"';font-size:40px;color:var(--orange);line-height:.5;display:block;margin-bottom:12px;font-style:normal;font-family:'Syne',sans-serif;font-weight:800;}
+.testi-author{display:flex;align-items:center;gap:12px;}
+.testi-avatar{width:42px;height:42px;border-radius:50%;background:var(--orange-mid);display:flex;align-items:center;justify-content:center;font-family:'Syne',sans-serif;font-weight:800;font-size:14px;color:var(--orange);}
+.testi-name{font-weight:600;font-size:14px;color:var(--purple);}
+.testi-role{font-size:12px;color:var(--text-muted);}
+
+/* CTA BANNER */
+.cta-banner{
+  margin:0 56px 80px;
+  background:var(--purple);
+  border-radius:28px;
+  padding:72px 72px;
+  display:flex;align-items:center;justify-content:space-between;gap:40px;
+  position:relative;overflow:hidden;
+}
+.cta-banner::before{
+  content:'';position:absolute;
+  width:400px;height:400px;border-radius:50%;
+  background:radial-gradient(circle,rgba(254,108,68,0.2) 0%,transparent 70%);
+  right:-80px;top:-80px;pointer-events:none;
+}
+.cta-banner::after{
+  content:'';position:absolute;
+  width:300px;height:300px;border-radius:50%;
+  background:radial-gradient(circle,rgba(254,108,68,0.12) 0%,transparent 70%);
+  left:40%;bottom:-100px;pointer-events:none;
+}
+.cta-banner-left{position:relative;z-index:2;}
+.cta-banner h2{font-family:'Syne',sans-serif;font-size:clamp(26px,3.5vw,46px);font-weight:800;color:#fff;letter-spacing:-2px;line-height:1.1;margin-bottom:12px;}
+.cta-banner p{color:rgba(255,255,255,0.55);font-size:15px;max-width:460px;}
+.cta-banner-right{position:relative;z-index:2;flex-shrink:0;}
+.btn-orange-white{display:inline-flex;align-items:center;gap:10px;background:var(--orange);color:#fff;font-family:'Syne',sans-serif;font-weight:700;font-size:15px;padding:16px 32px;border-radius:100px;text-decoration:none;cursor:none;transition:transform .2s,box-shadow .2s;}
+.btn-orange-white:hover{transform:translateY(-3px);box-shadow:0 12px 32px rgba(254,108,68,0.5);}
+
+/* FOOTER */
+footer{
+  background:var(--off-white);
+  border-top:1px solid rgba(40,25,54,0.08);
+  padding:48px 56px 32px;
+}
+.footer-top{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:48px;margin-bottom:48px;}
+.footer-brand p{color:var(--text-muted);font-size:14px;line-height:1.8;margin-top:16px;max-width:280px;}
+.footer-col h4{font-family:'Syne',sans-serif;font-size:13px;font-weight:700;color:var(--purple);letter-spacing:.08em;text-transform:uppercase;margin-bottom:16px;}
+.footer-col ul{list-style:none;display:flex;flex-direction:column;gap:10px;}
+.footer-col ul a{color:var(--text-muted);text-decoration:none;font-size:14px;transition:color .2s;cursor:none;}
+.footer-col ul a:hover{color:var(--orange);}
+.footer-bottom{border-top:1px solid rgba(40,25,54,0.08);padding-top:28px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;}
+.footer-bottom p{color:var(--text-light);font-size:13px;}
+.footer-socials{display:flex;gap:10px;}
+.footer-social{width:36px;height:36px;border-radius:9px;border:1px solid rgba(40,25,54,0.1);display:flex;align-items:center;justify-content:center;color:var(--text-muted);font-size:15px;text-decoration:none;transition:all .2s;cursor:none;}
+.footer-social:hover{background:var(--orange);border-color:var(--orange);color:#fff;}
+
+/* ============================================================
+   SERVICES PAGE
+   ============================================================ */
+#services{padding-top:72px;}
+.page-hero-wrap{
+  background:var(--off-white);
+  padding:80px 56px 80px;
+  position:relative;overflow:hidden;
+}
+.page-hero-wrap::after{
+  content:'';position:absolute;right:0;top:0;bottom:0;width:50%;
+  background:radial-gradient(ellipse at right,rgba(254,108,68,0.08) 0%,transparent 70%);
+  pointer-events:none;
+}
+.page-hero-wrap h1{font-family:'Syne',sans-serif;font-size:clamp(44px,6vw,84px);font-weight:800;letter-spacing:-3px;line-height:.96;color:var(--purple);position:relative;z-index:1;}
+.page-hero-wrap h1 span{color:var(--orange);}
+.page-hero-wrap p{color:var(--text-muted);font-size:17px;max-width:480px;margin-top:22px;font-weight:300;line-height:1.8;position:relative;z-index:1;}
+
+.services-detailed{padding:80px 56px 100px;}
+.svc-row{
+  display:grid;grid-template-columns:1fr 1fr;gap:64px;
+  align-items:center;padding:64px 0;
+  border-bottom:1px solid rgba(40,25,54,0.07);
+}
+.svc-row:last-child{border-bottom:none;}
+.svc-row.flip{direction:rtl;}
+.svc-row.flip>*{direction:ltr;}
+.svc-row-visual{
+  background:var(--off-white);border-radius:24px;
+  min-height:320px;display:flex;align-items:center;justify-content:center;
+  font-size:90px;border:1px solid rgba(40,25,54,0.06);
+  position:relative;overflow:hidden;
+}
+.svc-row-visual::before{
+  content:'';position:absolute;
+  width:200px;height:200px;border-radius:50%;
+  background:radial-gradient(circle,rgba(254,108,68,0.15) 0%,transparent 70%);
+}
+.svc-row-num{font-size:11px;letter-spacing:.15em;text-transform:uppercase;font-weight:700;color:var(--orange);margin-bottom:12px;}
+.svc-row h2{font-family:'Syne',sans-serif;font-size:34px;font-weight:800;letter-spacing:-1px;color:var(--purple);margin-bottom:14px;}
+.svc-row p{color:var(--text-muted);font-size:15px;line-height:1.85;margin-bottom:24px;}
+.tags-row{display:flex;flex-wrap:wrap;gap:8px;}
+.pill{background:var(--orange-light);color:var(--orange);border:1px solid rgba(254,108,68,0.2);font-size:12px;font-weight:600;padding:7px 16px;border-radius:100px;}
+
+/* ============================================================
+   PORTFOLIO PAGE
+   ============================================================ */
+#portfolio{padding-top:72px;}
+.portfolio-filters{
+  display:flex;gap:10px;flex-wrap:wrap;
+  padding:32px 56px 0;
+}
+.filter-btn{
+  background:none;border:1.5px solid rgba(40,25,54,0.12);
+  color:var(--text-muted);font-family:'DM Sans',sans-serif;
+  font-size:13px;font-weight:500;padding:9px 22px;border-radius:100px;
+  cursor:none;transition:all .2s;
+}
+.filter-btn:hover,.filter-btn.active{background:var(--orange);border-color:var(--orange);color:#fff;}
+
+.portfolio-masonry{
+  padding:40px 56px 100px;
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:24px;
+}
+.port-item{
+  border-radius:20px;overflow:hidden;
+  cursor:none;position:relative;
+  transition:transform .3s,box-shadow .3s;
+  background:var(--purple);
+}
+.port-item:hover{transform:translateY(-6px);box-shadow:var(--shadow-lg);}
+.port-item.span2{grid-column:span 2;}
+.port-video-thumb{
+  width:100%;min-height:220px;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:16px;position:relative;overflow:hidden;
+}
+.port-item.span2 .port-video-thumb{min-height:280px;}
+.port-video-label{color:rgba(255,255,255,0.5);font-size:12px;font-weight:500;position:relative;z-index:2;}
+.port-item-info{padding:20px 24px;background:#fff;}
+.port-item-cat{font-size:11px;letter-spacing:.1em;text-transform:uppercase;font-weight:700;color:var(--orange);margin-bottom:6px;}
+.port-item-title{font-family:'Syne',sans-serif;font-weight:700;font-size:16px;color:var(--purple);}
+.port-item-desc{font-size:13px;color:var(--text-muted);margin-top:6px;line-height:1.6;}
+.port-view-btn{
+  position:absolute;top:16px;right:16px;
+  background:var(--orange);color:#fff;
+  font-size:12px;font-weight:700;
+  padding:8px 16px;border-radius:100px;
+  opacity:0;transform:translateY(-4px);
+  transition:opacity .3s,transform .3s;
+  z-index:10;
+}
+.port-item:hover .port-view-btn{opacity:1;transform:translateY(0);}
+
+/* ============================================================
+   ABOUT PAGE
+   ============================================================ */
+#about{padding-top:72px;}
+.about-intro{
+  display:grid;grid-template-columns:1fr 1fr;gap:80px;
+  padding:80px 56px;align-items:center;
+  background:var(--off-white);
+}
+.about-intro h1{font-family:'Syne',sans-serif;font-size:clamp(40px,5vw,74px);font-weight:800;letter-spacing:-3px;line-height:.97;color:var(--purple);}
+.about-intro h1 em{color:var(--orange);font-style:normal;display:block;}
+.about-intro-right p{color:var(--text-muted);font-size:16px;line-height:1.9;margin-bottom:18px;}
+.about-nums{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:36px;}
+.about-num-box{background:#fff;border-radius:16px;padding:24px;border:1px solid rgba(40,25,54,0.06);}
+.about-num{font-family:'Syne',sans-serif;font-size:38px;font-weight:800;color:var(--purple);letter-spacing:-2px;line-height:1;}
+.about-num span{color:var(--orange);}
+.about-num-label{font-size:12px;color:var(--text-muted);margin-top:6px;}
+
+.values-wrap{padding:80px 56px;}
+.values-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:52px;}
+.val-card{background:var(--off-white);border-radius:18px;padding:32px;border:1px solid rgba(40,25,54,0.06);cursor:none;transition:transform .3s,box-shadow .3s,border-color .3s;}
+.val-card:hover{transform:translateY(-4px);box-shadow:var(--shadow);border-color:rgba(254,108,68,0.25);}
+.val-icon{font-size:36px;margin-bottom:16px;}
+.val-card h4{font-family:'Syne',sans-serif;font-size:17px;font-weight:700;color:var(--purple);margin-bottom:8px;}
+.val-card p{color:var(--text-muted);font-size:13px;line-height:1.75;}
+
+.team-wrap{padding:0 56px 100px;}
+.team-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;margin-top:52px;}
+.team-card{
+  background:var(--off-white);border-radius:20px;
+  overflow:hidden;border:1px solid rgba(40,25,54,0.06);
+  cursor:none;transition:transform .3s,box-shadow .3s;
+}
+.team-card:hover{transform:translateY(-6px);box-shadow:var(--shadow-lg);}
+.team-photo{
+  height:160px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:56px;background:var(--orange-light);
+}
+.team-info{padding:20px 20px;}
+.team-info h4{font-family:'Syne',sans-serif;font-size:16px;font-weight:700;color:var(--purple);margin-bottom:2px;}
+.team-info span{color:var(--text-muted);font-size:12px;}
+
+/* ============================================================
+   CONTACT PAGE
+   ============================================================ */
+#contact{padding-top:72px;}
+.contact-wrap{
+  display:grid;grid-template-columns:1fr 1fr;gap:80px;
+  padding:80px 56px 100px;align-items:start;
+}
+.contact-left h1{font-family:'Syne',sans-serif;font-size:clamp(36px,4.5vw,66px);font-weight:800;letter-spacing:-2px;line-height:.97;color:var(--purple);margin-bottom:20px;}
+.contact-left h1 span{color:var(--orange);}
+.contact-left>p{color:var(--text-muted);font-size:16px;line-height:1.85;margin-bottom:44px;}
+.contact-detail{display:flex;align-items:center;gap:16px;margin-bottom:20px;}
+.c-icon{width:46px;height:46px;background:var(--orange-light);border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0;}
+.c-text strong{display:block;font-weight:600;font-size:14px;color:var(--purple);}
+.c-text span{font-size:13px;color:var(--text-muted);}
+.contact-socials{display:flex;gap:10px;margin-top:36px;}
+.c-social{width:42px;height:42px;border-radius:10px;border:1.5px solid rgba(40,25,54,0.1);display:flex;align-items:center;justify-content:center;font-size:18px;text-decoration:none;transition:all .2s;cursor:none;}
+.c-social:hover{background:var(--orange);border-color:var(--orange);}
+
+.contact-form{background:var(--off-white);border-radius:24px;padding:48px;border:1px solid rgba(40,25,54,0.07);}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+.f-group{margin-bottom:18px;}
+.f-group label{display:block;font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--text-muted);margin-bottom:8px;}
+.f-control{
+  width:100%;background:#fff;
+  border:1.5px solid rgba(40,25,54,0.1);
+  border-radius:10px;padding:13px 16px;
+  color:var(--text);font-family:'DM Sans',sans-serif;font-size:15px;
+  outline:none;transition:border-color .2s;
+}
+.f-control:focus{border-color:var(--orange);}
+.f-control::placeholder{color:var(--text-light);}
+textarea.f-control{resize:vertical;min-height:120px;}
+select.f-control{cursor:none;}
+.f-submit{
+  width:100%;background:var(--orange);color:#fff;
+  font-family:'Syne',sans-serif;font-weight:700;font-size:16px;
+  padding:16px;border-radius:12px;border:none;cursor:none;
+  margin-top:8px;transition:transform .2s,box-shadow .2s;
+}
+.f-submit:hover{transform:translateY(-2px);box-shadow:0 8px 32px rgba(254,108,68,0.38);}
+
+/* ============================================================
+   PORTFOLIO DETAIL PAGES
+   ============================================================ */
+.port-detail{padding-top:72px;}
+.port-detail-hero{
+  padding:60px 56px 0;
+  background:var(--off-white);
+}
+.back-btn{
+  display:inline-flex;align-items:center;gap:8px;
+  color:var(--text-muted);font-size:13px;font-weight:500;
+  text-decoration:none;cursor:none;margin-bottom:32px;
+  transition:color .2s;
+}
+.back-btn:hover{color:var(--orange);}
+.port-detail-hero h1{font-family:'Syne',sans-serif;font-size:clamp(36px,5vw,72px);font-weight:800;letter-spacing:-3px;color:var(--purple);line-height:.96;margin-bottom:20px;}
+.port-detail-hero h1 span{color:var(--orange);}
+.port-detail-meta{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:40px;}
+.meta-pill{background:#fff;border:1px solid rgba(40,25,54,0.1);color:var(--text-muted);font-size:12px;font-weight:500;padding:8px 16px;border-radius:100px;}
+.meta-pill strong{color:var(--orange);}
+
+.port-detail-video{
+  width:100%;aspect-ratio:16/9;
+  border-radius:20px 20px 0 0;overflow:hidden;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:20px;position:relative;min-height:400px;
+}
+.port-detail-video .big-play{
+  width:80px;height:80px;background:var(--orange);border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  color:#fff;font-size:30px;position:relative;z-index:2;
+  cursor:none;transition:transform .3s,box-shadow .3s;
+}
+.port-detail-video .big-play:hover{transform:scale(1.1);box-shadow:0 12px 40px rgba(254,108,68,0.5);}
+.port-detail-video .big-play::after{content:'';position:absolute;width:100px;height:100px;border:3px solid rgba(254,108,68,0.4);border-radius:50%;animation:ripple 2s ease infinite;}
+
+.port-detail-body{padding:60px 56px 100px;}
+.port-detail-grid{display:grid;grid-template-columns:2fr 1fr;gap:60px;align-items:start;}
+.port-detail-content h2{font-family:'Syne',sans-serif;font-size:28px;font-weight:800;letter-spacing:-1px;color:var(--purple);margin-bottom:16px;}
+.port-detail-content p{color:var(--text-muted);font-size:15px;line-height:1.9;margin-bottom:20px;}
+
+.port-results-card{background:var(--off-white);border-radius:20px;padding:32px;border:1px solid rgba(40,25,54,0.06);position:sticky;top:100px;}
+.port-results-card h3{font-family:'Syne',sans-serif;font-size:16px;font-weight:700;color:var(--purple);margin-bottom:24px;letter-spacing:-.3px;}
+.result-row{display:flex;justify-content:space-between;align-items:center;padding:14px 0;border-bottom:1px solid rgba(40,25,54,0.06);}
+.result-row:last-child{border-bottom:none;}
+.result-label{font-size:13px;color:var(--text-muted);}
+.result-value{font-family:'Syne',sans-serif;font-weight:800;font-size:18px;color:var(--orange);}
+
+.port-more-videos{margin-top:48px;}
+.port-more-videos h2{font-family:'Syne',sans-serif;font-size:24px;font-weight:700;color:var(--purple);letter-spacing:-1px;margin-bottom:24px;}
+.port-videos-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;}
+.mini-video{border-radius:14px;overflow:hidden;cursor:none;transition:transform .3s;}
+.mini-video:hover{transform:scale(1.03);}
+.mini-video-thumb{
+  aspect-ratio:16/9;
+  display:flex;align-items:center;justify-content:center;position:relative;
+}
+.mini-play{width:36px;height:36px;background:var(--orange);border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-size:14px;position:relative;z-index:2;}
+.mini-video-label{font-size:11px;color:rgba(255,255,255,0.5);position:absolute;bottom:8px;left:12px;}
+.mini-info{padding:12px 14px;background:#fff;border:1px solid rgba(40,25,54,0.06);border-top:none;border-radius:0 0 14px 14px;}
+.mini-info-title{font-weight:600;font-size:13px;color:var(--purple);}
+
+/* RESPONSIVE */
+@media(max-width:960px){
+  nav{padding:0 24px;}
+  .nav-links{display:none;}
+  .hamburger{display:flex;}
+  .hero{grid-template-columns:1fr;padding:100px 24px 60px;}
+  .hero-right{display:none;}
+  .services-home,.portfolio-home,.testimonials,.cta-banner{padding-left:24px;padding-right:24px;}
+  .services-home-grid{grid-template-columns:1fr 1fr;}
+  .portfolio-home-grid{grid-template-columns:1fr;}
+  .port-card.large,.port-card.tall{grid-column:span 1;grid-row:span 1;}
+  .testi-grid{grid-template-columns:1fr;}
+  .cta-banner{flex-direction:column;padding:40px 32px;margin:0 24px 60px;}
+  footer{padding:40px 24px 24px;}
+  .footer-top{grid-template-columns:1fr 1fr;gap:32px;}
+  .page-hero-wrap,.services-detailed,.portfolio-masonry,.portfolio-filters,
+  .about-intro,.values-wrap,.team-wrap,.contact-wrap{padding-left:24px;padding-right:24px;}
+  .svc-row{grid-template-columns:1fr;gap:28px;}
+  .svc-row.flip{direction:ltr;}
+  .about-intro{grid-template-columns:1fr;}
+  .values-grid{grid-template-columns:1fr 1fr;}
+  .team-grid{grid-template-columns:repeat(2,1fr);}
+  .contact-wrap{grid-template-columns:1fr;}
+  .portfolio-masonry{grid-template-columns:1fr 1fr;}
+  .port-item.span2{grid-column:span 1;}
+  .port-detail-hero,.port-detail-body{padding-left:24px;padding-right:24px;}
+  .port-detail-grid{grid-template-columns:1fr;}
+  .port-results-card{position:static;}
+  .port-videos-grid{grid-template-columns:1fr 1fr;}
+  .form-row{grid-template-columns:1fr;}
+}
+</style>
+</head>
+<body>
+
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<!-- MOBILE NAV -->
+<div class="mobile-nav" id="mobileNav">
+  <button class="mobile-close" onclick="closeMobileNav()">✕</button>
+  <a href="#" onclick="goTo('home');closeMobileNav()">Home</a>
+  <a href="#" onclick="goTo('services');closeMobileNav()">Services</a>
+  <a href="#" onclick="goTo('portfolio');closeMobileNav()">Portfolio</a>
+  <a href="#" onclick="goTo('about');closeMobileNav()">About</a>
+  <a href="#" onclick="goTo('contact');closeMobileNav()">Contact</a>
+</div>
+
+<!-- NAV -->
+<nav id="mainNav">
+  <a href="#" class="logo-wrap" onclick="goTo('home')">
+    <div class="logo-icon">HT</div>
+    <span class="logo-text">HT<span>Mart</span></span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#" class="nav-link active" data-page="home" onclick="goTo('home')">Home</a></li>
+    <li><a href="#" class="nav-link" data-page="services" onclick="goTo('services')">Services</a></li>
+    <li><a href="#" class="nav-link" data-page="portfolio" onclick="goTo('portfolio')">Portfolio</a></li>
+    <li><a href="#" class="nav-link" data-page="about" onclick="goTo('about')">About</a></li>
+    <li><a href="#" class="nav-link nav-cta" data-page="contact" onclick="goTo('contact')">Let's Talk →</a></li>
+  </ul>
+  <button class="hamburger" onclick="openMobileNav()"><span></span><span></span><span></span></button>
+</nav>
+
+<!-- ===================== HOME ===================== -->
+<div id="home" class="page active">
+  <section class="hero">
+    <div class="hero-left">
+      <div class="hero-badge"><span class="pulse"></span> New Delhi's Gen-Z Social Agency</div>
+      <h1>
+        Creative<br>
+        <span class="highlight">Content</span>
+        <span class="stroke">That Converts.</span>
+      </h1>
+      <p class="hero-desc">We craft scroll-stopping campaigns, viral content, and performance-driven strategy for brands that want to matter online.</p>
+      <div class="hero-actions">
+        <a href="#" class="btn-primary" onclick="goTo('portfolio')">See Our Work <span class="arr">→</span></a>
+        <a href="#" class="btn-outline" onclick="goTo('contact')">Start a Project</a>
+      </div>
+    </div>
+    <div class="hero-right">
+      <div class="hero-visual-card">
+        <div class="hero-video-placeholder port-gradient-1">
+          <div class="play-btn" onclick="goTo('portfolio')">▶</div>
+          <span class="hero-video-label">Watch our showreel →</span>
+        </div>
+        <div class="hero-card-bottom">
+          <div class="hero-card-meta"><strong>FashionX Campaign</strong>Featured Work · 2024</div>
+          <span class="hero-card-tag">▶ Video</span>
+        </div>
+      </div>
+      <div class="hero-stats">
+        <div class="hero-stat"><div class="hero-stat-num">150<span>+</span></div><div class="hero-stat-label">Brands Grown</div></div>
+        <div class="hero-stat"><div class="hero-stat-num">8Cr<span>+</span></div><div class="hero-stat-label">Impressions</div></div>
+        <div class="hero-stat"><div class="hero-stat-num">98<span>%</span></div><div class="hero-stat-label">Retention Rate</div></div>
+      </div>
+    </div>
+  </section>
+
+  <div class="marquee-wrap">
+    <div class="marquee-track">
+      <div class="marquee-item"><span class="dot">✦</span>Social Media Marketing</div>
+      <div class="marquee-item"><span class="dot">✦</span>Content Creation</div>
+      <div class="marquee-item"><span class="dot">✦</span>Performance Ads</div>
+      <div class="marquee-item"><span class="dot">✦</span>Brand Strategy</div>
+      <div class="marquee-item"><span class="dot">✦</span>SEO & Growth</div>
+      <div class="marquee-item"><span class="dot">✦</span>Influencer Marketing</div>
+      <div class="marquee-item"><span class="dot">✦</span>Web Design</div>
+      <div class="marquee-item"><span class="dot">✦</span>Video Production</div>
+      <div class="marquee-item"><span class="dot">✦</span>Social Media Marketing</div>
+      <div class="marquee-item"><span class="dot">✦</span>Content Creation</div>
+      <div class="marquee-item"><span class="dot">✦</span>Performance Ads</div>
+      <div class="marquee-item"><span class="dot">✦</span>Brand Strategy</div>
+      <div class="marquee-item"><span class="dot">✦</span>SEO & Growth</div>
+      <div class="marquee-item"><span class="dot">✦</span>Influencer Marketing</div>
+      <div class="marquee-item"><span class="dot">✦</span>Web Design</div>
+      <div class="marquee-item"><span class="dot">✦</span>Video Production</div>
+    </div>
+  </div>
+
+  <!-- SERVICES HOME -->
+  <section class="services-home">
+    <div class="services-header">
+      <div>
+        <div class="section-tag">What We Do</div>
+        <h2 class="section-heading">Full-stack digital<br>firepower.</h2>
+      </div>
+      <a href="#" class="btn-outline" onclick="goTo('services')">All Services →</a>
+    </div>
+    <div class="services-home-grid">
+      <div class="svc-card reveal" onclick="goTo('services')">
+        <div class="svc-icon">📱</div>
+        <h3>Social Media</h3>
+        <p>Reels, carousels, stories — platform-native content that stops the scroll and starts real conversations.</p>
+        <div class="svc-arrow">→</div>
+      </div>
+      <div class="svc-card reveal" onclick="goTo('services')">
+        <div class="svc-icon">🎯</div>
+        <h3>Performance Marketing</h3>
+        <p>Data-driven paid campaigns on Meta & Google that deliver real ROI, not just reach.</p>
+        <div class="svc-arrow">→</div>
+      </div>
+      <div class="svc-card reveal" onclick="goTo('services')">
+        <div class="svc-icon">🎬</div>
+        <h3>Video Production</h3>
+        <p>From concept to cut — thumb-stopping video content built for today's formats and feeds.</p>
+        <div class="svc-arrow">→</div>
+      </div>
+      <div class="svc-card reveal" onclick="goTo('services')">
+        <div class="svc-icon">✨</div>
+        <h3>Brand Identity</h3>
+        <p>We build visual languages and brand systems that feel alive, consistent and deeply memorable.</p>
+        <div class="svc-arrow">→</div>
+      </div>
+      <div class="svc-card reveal" onclick="goTo('services')">
+        <div class="svc-icon">🔍</div>
+        <h3>SEO & Growth</h3>
+        <p>Organic traffic that compounds. We get you ranked, discovered, and growing without burning budget forever.</p>
+        <div class="svc-arrow">→</div>
+      </div>
+      <div class="svc-card reveal" onclick="goTo('services')">
+        <div class="svc-icon">🤝</div>
+        <h3>Influencer Marketing</h3>
+        <p>The right creators, your audience, authentic results. We handle everything from sourcing to reporting.</p>
+        <div class="svc-arrow">→</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PORTFOLIO HOME -->
+  <section class="portfolio-home">
+    <div class="portfolio-home-header">
+      <div>
+        <div class="section-tag">Our Work</div>
+        <h2 class="section-heading">Campaigns that<br>made noise.</h2>
+      </div>
+      <a href="#" class="btn-outline" onclick="goTo('portfolio')">View All Work →</a>
+    </div>
+    <div class="portfolio-home-grid">
+      <!-- Card 1 — tall+large -->
+      <div class="port-card large reveal" onclick="goToPortDetail('fashionx')">
+        <div class="port-video port-gradient-1">
+          <div class="port-overlay-icon">👗</div>
+          <div class="port-play">▶</div>
+          <span class="port-click-hint">View Case Study</span>
+        </div>
+        <div class="port-info">
+          <div class="port-cat">Social Media · Video</div>
+          <div class="port-title">FashionX — 400% ROAS in 60 Days</div>
+        </div>
+      </div>
+      <!-- Card 2 -->
+      <div class="port-card reveal" onclick="goToPortDetail('healthfirst')">
+        <div class="port-video port-gradient-4">
+          <div class="port-overlay-icon">🏥</div>
+          <div class="port-play">▶</div>
+          <span class="port-click-hint">View Case Study</span>
+        </div>
+        <div class="port-info">
+          <div class="port-cat">Brand Identity · SEO</div>
+          <div class="port-title">HealthFirst — Brand Overhaul</div>
+        </div>
+      </div>
+      <!-- Card 3 -->
+      <div class="port-card reveal" onclick="goToPortDetail('spicelane')">
+        <div class="port-video port-gradient-3">
+          <div class="port-overlay-icon">🍕</div>
+          <div class="port-play">▶</div>
+          <span class="port-click-hint">View Case Study</span>
+        </div>
+        <div class="port-info">
+          <div class="port-cat">Influencer · Content</div>
+          <div class="port-title">SpiceLane — 2M Impression Launch</div>
+        </div>
+      </div>
+      <!-- Card 4 -->
+      <div class="port-card reveal" onclick="goToPortDetail('luxebynie')">
+        <div class="port-video port-gradient-5">
+          <div class="port-overlay-icon">💎</div>
+          <div class="port-play">▶</div>
+          <span class="port-click-hint">View Case Study</span>
+        </div>
+        <div class="port-info">
+          <div class="port-cat">Performance · Social</div>
+          <div class="port-title">LuxeByNia — ₹2Cr First Month</div>
+        </div>
+      </div>
+      <!-- Card 5 -->
+      <div class="port-card reveal" onclick="goToPortDetail('greenleaf')">
+        <div class="port-video port-gradient-2">
+          <div class="port-overlay-icon">🌿</div>
+          <div class="port-play">▶</div>
+          <span class="port-click-hint">View Case Study</span>
+        </div>
+        <div class="port-info">
+          <div class="port-cat">Web Design · SEO</div>
+          <div class="port-title">GreenLeaf — D2C Launch</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS -->
+  <section class="testimonials">
+    <div class="section-tag">Client Love</div>
+    <h2 class="section-heading" style="font-size:clamp(32px,4vw,54px);">What our clients say.</h2>
+    <div class="testi-grid">
+      <div class="testi-card reveal">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-text">HT Mart completely transformed our digital presence. Our Instagram grew 300% in 3 months and our sales followed. Genuinely the best agency we've worked with.</p>
+        <div class="testi-author">
+          <div class="testi-avatar">AK</div>
+          <div><div class="testi-name">Ananya Kapoor</div><div class="testi-role">Founder, FashionX</div></div>
+        </div>
+      </div>
+      <div class="testi-card reveal">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-text">The video content they create is next level — it feels native, it feels real, and it converts. Our cost per acquisition dropped by 60% in the first campaign.</p>
+        <div class="testi-author">
+          <div class="testi-avatar">RV</div>
+          <div><div class="testi-name">Rahul Verma</div><div class="testi-role">CMO, HealthFirst</div></div>
+        </div>
+      </div>
+      <div class="testi-card reveal">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-text">They don't just execute — they actually think. Every strategy they brought us was tailored, creative, and backed by real data. Cannot recommend enough.</p>
+        <div class="testi-author">
+          <div class="testi-avatar">PS</div>
+          <div><div class="testi-name">Pooja Sharma</div><div class="testi-role">CEO, SpiceLane</div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA BANNER -->
+  <div class="cta-banner reveal">
+    <div class="cta-banner-left">
+      <h2>Ready to make your brand impossible to ignore?</h2>
+      <p>Let's build a digital presence that actually moves the needle for your business.</p>
+    </div>
+    <div class="cta-banner-right">
+      <a href="#" class="btn-orange-white" onclick="goTo('contact')">Let's Talk → </a>
+    </div>
+  </div>
+
+  <footer>
+    <div class="footer-top">
+      <div class="footer-brand">
+        <a href="#" class="logo-wrap" onclick="goTo('home')">
+          <div class="logo-icon">HT</div>
+          <span class="logo-text">HT<span>Mart</span></span>
+        </a>
+        <p>New Delhi's creative social media agency. We make brands unmissable online through content, strategy, and performance marketing.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Pages</h4>
+        <ul>
+          <li><a href="#" onclick="goTo('services')">Services</a></li>
+          <li><a href="#" onclick="goTo('portfolio')">Portfolio</a></li>
+          <li><a href="#" onclick="goTo('about')">About Us</a></li>
+          <li><a href="#" onclick="goTo('contact')">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Services</h4>
+        <ul>
+          <li><a href="#" onclick="goTo('services')">Social Media</a></li>
+          <li><a href="#" onclick="goTo('services')">Performance Ads</a></li>
+          <li><a href="#" onclick="goTo('services')">Video Production</a></li>
+          <li><a href="#" onclick="goTo('services')">Brand Identity</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <ul>
+          <li><a href="#">hello@htmart.agency</a></li>
+          <li><a href="#">+91 98765 43210</a></li>
+          <li><a href="#">New Delhi, India</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2025 HT Mart. All rights reserved.</p>
+      <div class="footer-socials">
+        <a class="footer-social" href="#">📸</a>
+        <a class="footer-social" href="#">💼</a>
+        <a class="footer-social" href="#">🐦</a>
+        <a class="footer-social" href="#">▶️</a>
+      </div>
+    </div>
+  </footer>
+</div>
+
+<!-- ===================== SERVICES ===================== -->
+<div id="services" class="page">
+  <div class="page-hero-wrap">
+    <div class="section-tag">Our Services</div>
+    <h1>Everything your brand<br>needs to <span>dominate</span> online.</h1>
+    <p>Six powerful offerings — built for brands that want real growth, not just pretty numbers.</p>
+  </div>
+  <div class="services-detailed">
+    <div class="svc-row reveal">
+      <div>
+        <div class="svc-row-num">01 — Social Media Marketing</div>
+        <h2>Content that hits different.</h2>
+        <p>We don't just post — we create moments. Our team crafts platform-native content that resonates with Gen-Z audiences and converts casual scrollers into brand loyalists. Every post is strategic, every story has a purpose.</p>
+        <div class="tags-row"><span class="pill">Instagram</span><span class="pill">Reels</span><span class="pill">YouTube Shorts</span><span class="pill">LinkedIn</span><span class="pill">Community Management</span></div>
+      </div>
+      <div class="svc-row-visual">📱</div>
+    </div>
+    <div class="svc-row flip reveal">
+      <div>
+        <div class="svc-row-num">02 — Performance Marketing</div>
+        <h2>Ads that actually work.</h2>
+        <p>Every rupee tracked, optimised, and working for you. Meta Ads, Google Ads, programmatic — we run campaigns that deliver measurable ROI, not vanity metrics. Our average client sees 3x ROAS in the first 90 days.</p>
+        <div class="tags-row"><span class="pill">Meta Ads</span><span class="pill">Google Ads</span><span class="pill">Retargeting</span><span class="pill">Conversion Optimization</span></div>
+      </div>
+      <div class="svc-row-visual">🎯</div>
+    </div>
+    <div class="svc-row reveal">
+      <div>
+        <div class="svc-row-num">03 — Video Production</div>
+        <h2>Video that stops the scroll.</h2>
+        <p>From concept to final cut — we produce thumb-stopping videos built for today's formats. Reels, brand films, product videos, testimonials — everything designed to perform on the feeds your audience lives on.</p>
+        <div class="tags-row"><span class="pill">Reels</span><span class="pill">Brand Films</span><span class="pill">Product Videos</span><span class="pill">Testimonials</span><span class="pill">Motion Graphics</span></div>
+      </div>
+      <div class="svc-row-visual">🎬</div>
+    </div>
+    <div class="svc-row flip reveal">
+      <div>
+        <div class="svc-row-num">04 — Brand Identity</div>
+        <h2>Brands with actual personality.</h2>
+        <p>Your brand is more than a logo. We build complete visual identities, tone of voice guidelines, and brand systems that feel alive, consistent, and human across every touchpoint — from packaging to Instagram.</p>
+        <div class="tags-row"><span class="pill">Logo Design</span><span class="pill">Brand Guidelines</span><span class="pill">Tone of Voice</span><span class="pill">Visual Systems</span></div>
+      </div>
+      <div class="svc-row-visual">✨</div>
+    </div>
+    <div class="svc-row reveal">
+      <div>
+        <div class="svc-row-num">05 — SEO & Growth</div>
+        <h2>Found. Clicked. Converted.</h2>
+        <p>We build long-term organic growth that compounds over time — technical SEO, content strategy, and link building that gets you ranking for the keywords that actually bring in customers and revenue.</p>
+        <div class="tags-row"><span class="pill">On-Page SEO</span><span class="pill">Technical SEO</span><span class="pill">Content Strategy</span><span class="pill">Link Building</span></div>
+      </div>
+      <div class="svc-row-visual">🔍</div>
+    </div>
+    <div class="svc-row flip reveal">
+      <div>
+        <div class="svc-row-num">06 — Influencer Marketing</div>
+        <h2>Real voices. Real reach.</h2>
+        <p>We connect your brand with creators your audience already trusts — from micro-influencers to mega stars. We handle everything from sourcing and briefing to campaign execution and detailed performance reporting.</p>
+        <div class="tags-row"><span class="pill">Creator Sourcing</span><span class="pill">Campaign Management</span><span class="pill">UGC Content</span><span class="pill">Performance Analytics</span></div>
+      </div>
+      <div class="svc-row-visual">🤝</div>
+    </div>
+  </div>
+  <div class="cta-banner reveal" style="margin:0 56px 80px;">
+    <div class="cta-banner-left">
+      <h2>Not sure which service fits? Let's figure it out together.</h2>
+      <p>A quick chat is all it takes to build the right strategy for your brand.</p>
+    </div>
+    <div class="cta-banner-right"><a href="#" class="btn-orange-white" onclick="goTo('contact')">Book a Free Call →</a></div>
+  </div>
+  <footer>
+    <div class="footer-top">
+      <div class="footer-brand"><a href="#" class="logo-wrap" onclick="goTo('home')"><div class="logo-icon">HT</div><span class="logo-text">HT<span>Mart</span></span></a><p>New Delhi's creative social media agency. We make brands unmissable online.</p></div>
+      <div class="footer-col"><h4>Pages</h4><ul><li><a href="#" onclick="goTo('services')">Services</a></li><li><a href="#" onclick="goTo('portfolio')">Portfolio</a></li><li><a href="#" onclick="goTo('about')">About Us</a></li><li><a href="#" onclick="goTo('contact')">Contact</a></li></ul></div>
+      <div class="footer-col"><h4>Services</h4><ul><li><a href="#">Social Media</a></li><li><a href="#">Performance Ads</a></li><li><a href="#">Video Production</a></li><li><a href="#">Brand Identity</a></li></ul></div>
+      <div class="footer-col"><h4>Contact</h4><ul><li><a href="#">hello@htmart.agency</a></li><li><a href="#">+91 98765 43210</a></li><li><a href="#">New Delhi, India</a></li></ul></div>
+    </div>
+    <div class="footer-bottom"><p>© 2025 HT Mart. All rights reserved.</p><div class="footer-socials"><a class="footer-social" href="#">📸</a><a class="footer-social" href="#">💼</a><a class="footer-social" href="#">🐦</a><a class="footer-social" href="#">▶️</a></div></div>
+  </footer>
+</div>
+
+<!-- ===================== PORTFOLIO ===================== -->
+<div id="portfolio" class="page">
+  <div class="page-hero-wrap">
+    <div class="section-tag">Our Work</div>
+    <h1>Where strategy<br>meets <span>art.</span></h1>
+    <p>A curated look at campaigns, content, and brands we've helped build, grow, and make unforgettable.</p>
+  </div>
+  <div class="portfolio-filters">
+    <button class="filter-btn active">All</button>
+    <button class="filter-btn">Social Media</button>
+    <button class="filter-btn">Video</button>
+    <button class="filter-btn">Performance</button>
+    <button class="filter-btn">Brand</button>
+    <button class="filter-btn">Influencer</button>
+  </div>
+  <div class="portfolio-masonry">
+    <div class="port-item span2 reveal" onclick="goToPortDetail('fashionx')">
+      <div class="port-view-btn">View Case →</div>
+      <div class="port-video-thumb port-gradient-1" style="min-height:280px;">
+        <div class="port-overlay-icon">👗</div>
+        <div class="port-play">▶</div>
+        <span class="port-video-label">Campaign Video · 2:34</span>
+      </div>
+      <div class="port-item-info">
+        <div class="port-item-cat">Social Media · Performance · Video</div>
+        <div class="port-item-title">FashionX — 400% ROAS in 60 Days</div>
+        <div class="port-item-desc">End-to-end social campaign that scaled a fashion D2C brand from 0 to ₹1Cr monthly revenue.</div>
+      </div>
+    </div>
+    <div class="port-item reveal" onclick="goToPortDetail('healthfirst')">
+      <div class="port-view-btn">View Case →</div>
+      <div class="port-video-thumb port-gradient-4">
+        <div class="port-overlay-icon">🏥</div>
+        <div class="port-play">▶</div>
+        <span class="port-video-label">Brand Film · 1:48</span>
+      </div>
+      <div class="port-item-info">
+        <div class="port-item-cat">Brand Identity · SEO</div>
+        <div class="port-item-title">HealthFirst — Complete Brand Overhaul</div>
+        <div class="port-item-desc">New visual identity, tone of voice and SEO strategy for a healthcare startup.</div>
+      </div>
+    </div>
+    <div class="port-item reveal" onclick="goToPortDetail('spicelane')">
+      <div class="port-view-btn">View Case →</div>
+      <div class="port-video-thumb port-gradient-3">
+        <div class="port-overlay-icon">🍕</div>
+        <div class="port-play">▶</div>
+        <span class="port-video-label">Influencer Content · 0:59</span>
+      </div>
+      <div class="port-item-info">
+        <div class="port-item-cat">Influencer · Content · Video</div>
+        <div class="port-item-title">SpiceLane — 2M Impression Launch</div>
+        <div class="port-item-desc">Food brand launch across 40 creators in 2 weeks, generating 2M organic impressions.</div>
+      </div>
+    </div>
+    <div class="port-item reveal" onclick="goToPortDetail('luxebynie')">
+      <div class="port-view-btn">View Case →</div>
+      <div class="port-video-thumb port-gradient-5">
+        <div class="port-overlay-icon">💎</div>
+        <div class="port-play">▶</div>
+        <span class="port-video-label">Product Reels · 0:30</span>
+      </div>
+      <div class="port-item-info">
+        <div class="port-item-cat">Performance · Social · Video</div>
+        <div class="port-item-title">LuxeByNia — ₹2Cr Revenue Month 1</div>
+        <div class="port-item-desc">Luxury jewellery brand launch with Meta Ads + organic content driving ₹2Cr in first month.</div>
+      </div>
+    </div>
+    <div class="port-item span2 reveal" onclick="goToPortDetail('greenleaf')">
+      <div class="port-view-btn">View Case →</div>
+      <div class="port-video-thumb port-gradient-2" style="min-height:240px;">
+        <div class="port-overlay-icon">🌿</div>
+        <div class="port-play">▶</div>
+        <span class="port-video-label">Brand Video · 1:20</span>
+      </div>
+      <div class="port-item-info">
+        <div class="port-item-cat">Web Design · SEO · Brand</div>
+        <div class="port-item-title">GreenLeaf — D2C Store Built from Zero</div>
+        <div class="port-item-desc">Full brand + web design + SEO for a sustainable D2C brand. 10K organic visitors in month 3.</div>
+      </div>
+    </div>
+  </div>
+  <footer>
+    <div class="footer-top">
+      <div class="footer-brand"><a href="#" class="logo-wrap" onclick="goTo('home')"><div class="logo-icon">HT</div><span class="logo-text">HT<span>Mart</span></span></a><p>New Delhi's creative social media agency.</p></div>
+      <div class="footer-col"><h4>Pages</h4><ul><li><a href="#" onclick="goTo('services')">Services</a></li><li><a href="#" onclick="goTo('portfolio')">Portfolio</a></li><li><a href="#" onclick="goTo('about')">About</a></li><li><a href="#" onclick="goTo('contact')">Contact</a></li></ul></div>
+      <div class="footer-col"><h4>Work</h4><ul><li><a href="#" onclick="goToPortDetail('fashionx')">FashionX</a></li><li><a href="#" onclick="goToPortDetail('healthfirst')">HealthFirst</a></li><li><a href="#" onclick="goToPortDetail('spicelane')">SpiceLane</a></li><li><a href="#" onclick="goToPortDetail('luxebynie')">LuxeByNia</a></li></ul></div>
+      <div class="footer-col"><h4>Contact</h4><ul><li><a href="#">hello@htmart.agency</a></li><li><a href="#">+91 98765 43210</a></li><li><a href="#">New Delhi, India</a></li></ul></div>
+    </div>
+    <div class="footer-bottom"><p>© 2025 HT Mart. All rights reserved.</p><div class="footer-socials"><a class="footer-social" href="#">📸</a><a class="footer-social" href="#">💼</a><a class="footer-social" href="#">🐦</a><a class="footer-social" href="#">▶️</a></div></div>
+  </footer>
+</div>
+
+<!-- ===================== ABOUT ===================== -->
+<div id="about" class="page">
+  <div class="about-intro">
+    <div class="reveal">
+      <div class="section-tag">About HT Mart</div>
+      <h1>We're not your<br>average <em>agency.</em></h1>
+    </div>
+    <div class="reveal">
+      <p>HT Mart was built out of frustration — tired of agencies that were slow, generic, and out of touch with how the internet actually works. So we built something different.</p>
+      <p>A team of digital natives, storytellers, data nerds, and creative thinkers — all obsessed with one thing: making your brand impossible to ignore online.</p>
+      <p>Based in New Delhi, we work with brands across India and globally. Our secret? We actually care about your outcomes, not just our deliverables.</p>
+      <div class="about-nums">
+        <div class="about-num-box"><div class="about-num">150<span>+</span></div><div class="about-num-label">Brands Elevated</div></div>
+        <div class="about-num-box"><div class="about-num">6<span>yr</span></div><div class="about-num-label">In Business</div></div>
+        <div class="about-num-box"><div class="about-num">25<span>+</span></div><div class="about-num-label">Team Members</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="values-wrap">
+    <div class="section-tag">What We Stand For</div>
+    <h2 class="section-heading" style="font-size:clamp(32px,4vw,54px);">Values that drive<br>everything we do.</h2>
+    <div class="values-grid">
+      <div class="val-card reveal"><div class="val-icon">⚡</div><h4>Move Fast</h4><p>Trends wait for no one. We live ahead of the algorithm, not chasing it.</p></div>
+      <div class="val-card reveal"><div class="val-icon">💡</div><h4>Think Different</h4><p>Cookie-cutter is our nemesis. Every brand gets a strategy as unique as their story.</p></div>
+      <div class="val-card reveal"><div class="val-icon">📊</div><h4>Data Always First</h4><p>Great vibes + hard data = unstoppable. We never guess when we can measure.</p></div>
+      <div class="val-card reveal"><div class="val-icon">🤝</div><h4>Real Partnership</h4><p>We treat your brand like it's ours. Your growth is literally our KPI.</p></div>
+      <div class="val-card reveal"><div class="val-icon">🌏</div><h4>Think Global</h4><p>Delhi roots, global mindset. Built for brands that want to scale across borders.</p></div>
+      <div class="val-card reveal"><div class="val-icon">🎨</div><h4>No Boring Content</h4><p>If it's not scroll-stopping, it's not going live. High standards, always.</p></div>
+    </div>
+  </div>
+
+  <div class="team-wrap">
+    <div class="section-tag">The Team</div>
+    <h2 class="section-heading" style="font-size:clamp(32px,4vw,54px);">The people behind<br>the magic.</h2>
+    <div class="team-grid">
+      <div class="team-card reveal"><div class="team-photo">👤</div><div class="team-info"><h4>Arjun Sharma</h4><span>Founder & CEO</span></div></div>
+      <div class="team-card reveal"><div class="team-photo">👤</div><div class="team-info"><h4>Priya Kapoor</h4><span>Head of Strategy</span></div></div>
+      <div class="team-card reveal"><div class="team-photo">👤</div><div class="team-info"><h4>Rohan Mehta</h4><span>Creative Director</span></div></div>
+      <div class="team-card reveal"><div class="team-photo">👤</div><div class="team-info"><h4>Sneha Bose</h4><span>Performance Lead</span></div></div>
+    </div>
+  </div>
+  <div class="cta-banner reveal" style="margin:0 56px 80px;">
+    <div class="cta-banner-left"><h2>Want to work with this team?</h2><p>Let's have a real conversation about your brand and what's possible.</p></div>
+    <div class="cta-banner-right"><a href="#" class="btn-orange-white" onclick="goTo('contact')">Get in Touch →</a></div>
+  </div>
+  <footer>
+    <div class="footer-top">
+      <div class="footer-brand"><a href="#" class="logo-wrap" onclick="goTo('home')"><div class="logo-icon">HT</div><span class="logo-text">HT<span>Mart</span></span></a><p>New Delhi's creative social media agency.</p></div>
+      <div class="footer-col"><h4>Pages</h4><ul><li><a href="#" onclick="goTo('services')">Services</a></li><li><a href="#" onclick="goTo('portfolio')">Portfolio</a></li><li><a href="#" onclick="goTo('about')">About</a></li><li><a href="#" onclick="goTo('contact')">Contact</a></li></ul></div>
+      <div class="footer-col"><h4>Services</h4><ul><li><a href="#">Social Media</a></li><li><a href="#">Performance Ads</a></li><li><a href="#">Video Production</a></li><li><a href="#">Brand Identity</a></li></ul></div>
+      <div class="footer-col"><h4>Contact</h4><ul><li><a href="#">hello@htmart.agency</a></li><li><a href="#">+91 98765 43210</a></li><li><a href="#">New Delhi, India</a></li></ul></div>
+    </div>
+    <div class="footer-bottom"><p>© 2025 HT Mart. All rights reserved.</p><div class="footer-socials"><a class="footer-social" href="#">📸</a><a class="footer-social" href="#">💼</a><a class="footer-social" href="#">🐦</a><a class="footer-social" href="#">▶️</a></div></div>
+  </footer>
+</div>
+
+<!-- ===================== CONTACT ===================== -->
+<div id="contact" class="page">
+  <div class="contact-wrap">
+    <div class="contact-left reveal">
+      <div class="section-tag">Get In Touch</div>
+      <h1>Let's make<br>something <span>fire.</span></h1>
+      <p>Got a brief, an idea, or just a feeling that your brand needs a serious glow-up? We'd love to hear it. Drop us a message and we'll get back within 24 hours.</p>
+      <div class="contact-detail"><div class="c-icon">📍</div><div class="c-text"><strong>New Delhi, India</strong><span>Serving clients globally</span></div></div>
+      <div class="contact-detail"><div class="c-icon">📧</div><div class="c-text"><strong>hello@htmart.agency</strong><span>Response within 24hrs</span></div></div>
+      <div class="contact-detail"><div class="c-icon">📞</div><div class="c-text"><strong>+91 98765 43210</strong><span>Mon–Sat, 10am–7pm IST</span></div></div>
+      <div class="contact-socials">
+        <a class="c-social" href="#">📸</a>
+        <a class="c-social" href="#">💼</a>
+        <a class="c-social" href="#">🐦</a>
+        <a class="c-social" href="#">▶️</a>
+      </div>
+    </div>
+    <div class="contact-form reveal">
+      <div class="form-row">
+        <div class="f-group"><label>First Name</label><input type="text" class="f-control" placeholder="Rahul"></div>
+        <div class="f-group"><label>Last Name</label><input type="text" class="f-control" placeholder="Gupta"></div>
+      </div>
+      <div class="f-group"><label>Email Address</label><input type="email" class="f-control" placeholder="rahul@yourbrand.com"></div>
+      <div class="f-group"><label>Brand / Company</label><input type="text" class="f-control" placeholder="Your Brand Name"></div>
+      <div class="f-group"><label>Service Needed</label>
+        <select class="f-control">
+          <option value="">Select a service...</option>
+          <option>Social Media Marketing</option>
+          <option>Performance Marketing</option>
+          <option>Video Production</option>
+          <option>Brand Identity</option>
+          <option>SEO & Growth</option>
+          <option>Influencer Marketing</option>
+          <option>Full Package — Everything!</option>
+        </select>
+      </div>
+      <div class="f-group"><label>Tell Us More</label><textarea class="f-control" placeholder="Tell us about your brand, your goals, and what you want to achieve..."></textarea></div>
+      <button class="f-submit" onclick="submitForm(this)">Send Message ✦</button>
+    </div>
+  </div>
+  <footer>
+    <div class="footer-top">
+      <div class="footer-brand"><a href="#" class="logo-wrap" onclick="goTo('home')"><div class="logo-icon">HT</div><span class="logo-text">HT<span>Mart</span></span></a><p>New Delhi's creative social media agency.</p></div>
+      <div class="footer-col"><h4>Pages</h4><ul><li><a href="#" onclick="goTo('services')">Services</a></li><li><a href="#" onclick="goTo('portfolio')">Portfolio</a></li><li><a href="#" onclick="goTo('about')">About</a></li><li><a href="#" onclick="goTo('contact')">Contact</a></li></ul></div>
+      <div class="footer-col"><h4>Services</h4><ul><li><a href="#">Social Media</a></li><li><a href="#">Performance Ads</a></li><li><a href="#">Video Production</a></li><li><a href="#">Brand Identity</a></li></ul></div>
+      <div class="footer-col"><h4>Contact</h4><ul><li><a href="#">hello@htmart.agency</a></li><li><a href="#">+91 98765 43210</a></li><li><a href="#">New Delhi, India</a></li></ul></div>
+    </div>
+    <div class="footer-bottom"><p>© 2025 HT Mart. All rights reserved.</p><div class="footer-socials"><a class="footer-social" href="#">📸</a><a class="footer-social" href="#">💼</a><a class="footer-social" href="#">🐦</a><a class="footer-social" href="#">▶️</a></div></div>
+  </footer>
+</div>
+
+<!-- ===================== PORTFOLIO DETAIL PAGES ===================== -->
+<!-- FashionX -->
+<div id="port-fashionx" class="page port-detail">
+  <div class="port-detail-hero">
+    <a href="#" class="back-btn" onclick="goTo('portfolio')">← Back to Portfolio</a>
+    <h1>FashionX — <span>400% ROAS</span><br>in 60 Days</h1>
+    <div class="port-detail-meta">
+      <span class="meta-pill"><strong>Category:</strong> Social Media · Performance</span>
+      <span class="meta-pill"><strong>Duration:</strong> 60 Days</span>
+      <span class="meta-pill"><strong>Platform:</strong> Meta · Instagram</span>
+      <span class="meta-pill"><strong>Year:</strong> 2024</span>
+    </div>
+    <div class="port-detail-video port-gradient-1">
+      <div class="port-overlay-icon" style="font-size:140px;opacity:.08;">👗</div>
+      <div class="big-play">▶</div>
+      <span style="color:rgba(255,255,255,0.5);font-size:13px;position:relative;z-index:2;">Campaign Video Placeholder · 2:34</span>
+    </div>
+  </div>
+  <div class="port-detail-body">
+    <div class="port-detail-grid">
+      <div class="port-detail-content">
+        <h2>The Challenge</h2>
+        <p>FashionX was a D2C fashion brand with great products and zero digital presence. They'd tried running ads themselves with minimal results and came to us needing a complete social media and performance strategy from scratch.</p>
+        <h2>Our Approach</h2>
+        <p>We started with a deep brand audit and competitive analysis, then built a content strategy centred on short-form video — Reels that showcased their products in real-life scenarios rather than sterile product shots. Simultaneously, we rebuilt their Meta Ads funnel from the ground up with proper audience segmentation and creative testing.</p>
+        <p>Our content team produced 3 Reels per week — each with multiple hooks tested against each other. The winning creative concepts were then amplified through paid spend. We also ran a micro-influencer campaign with 12 creators in the fashion niche for authentic social proof.</p>
+        <h2>The Results</h2>
+        <p>Within 60 days, FashionX went from struggling with 2x ROAS to a consistent 400% ROAS. Their Instagram grew from 2,000 to 28,000 followers organically. Monthly revenue crossed ₹1Cr for the first time.</p>
+        <div class="port-more-videos">
+          <h2>More from this Campaign</h2>
+          <div class="port-videos-grid">
+            <div class="mini-video">
+              <div class="mini-video-thumb port-gradient-1"><div class="port-overlay-icon" style="font-size:40px;opacity:.15;">👗</div><div class="mini-play">▶</div><span class="mini-video-label">Reel #1 · 0:30</span></div>
+              <div class="mini-info"><div class="mini-info-title">Summer Drop Campaign</div></div>
+            </div>
+            <div class="mini-video">
+              <div class="mini-video-thumb port-gradient-1"><div class="port-overlay-icon" style="font-size:40px;opacity:.15;">✨</div><div class="mini-play">▶</div><span class="mini-video-label">Reel #2 · 0:22</span></div>
+              <div class="mini-info"><div class="mini-info-title">Influencer Collab</div></div>
+            </div>
+            <div class="mini-video">
+              <div class="mini-video-thumb port-gradient-1"><div class="port-overlay-icon" style="font-size:40px;opacity:.15;">🛍️</div><div class="mini-play">▶</div><span class="mini-video-label">Ad Creative · 0:15</span></div>
+              <div class="mini-info"><div class="mini-info-title">Meta Ad — Best Performer</div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="port-results-card">
+          <h3>Campaign Results</h3>
+          <div class="result-row"><span class="result-label">ROAS Achieved</span><span class="result-value">400%</span></div>
+          <div class="result-row"><span class="result-label">Revenue Generated</span><span class="result-value">₹1Cr+</span></div>
+          <div class="result-row"><span class="result-label">Followers Gained</span><span class="result-value">+26K</span></div>
+          <div class="result-row"><span class="result-label">Cost Per Purchase</span><span class="result-value">↓ 68%</span></div>
+          <div class="result-row"><span class="result-label">Video Views</span><span class="result-value">4.2M</span></div>
+          <div class="result-row"><span class="result-label">Campaign Duration</span><span class="result-value">60 Days</span></div>
+        </div>
+        <div style="margin-top:16px;text-align:center;">
+          <a href="#" class="btn-primary" style="width:100%;justify-content:center;" onclick="goTo('contact')">Start a Similar Project <span class="arr">→</span></a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <footer>
+    <div class="footer-top">
+      <div class="footer-brand"><a href="#" class="logo-wrap" onclick="goTo('home')"><div class="logo-icon">HT</div><span class="logo-text">HT<span>Mart</span></span></a><p>New Delhi's creative social media agency.</p></div>
+      <div class="footer-col"><h4>Pages</h4><ul><li><a href="#" onclick="goTo('services')">Services</a></li><li><a href="#" onclick="goTo('portfolio')">Portfolio</a></li><li><a href="#" onclick="goTo('about')">About</a></li><li><a href="#" onclick="goTo('contact')">Contact</a></li></ul></div>
+      <div class="footer-col"><h4>More Work</h4><ul><li><a href="#" onclick="goToPortDetail('healthfirst')">HealthFirst</a></li><li><a href="#" onclick="goToPortDetail('spicelane')">SpiceLane</a></li><li><a href="#" onclick="goToPortDetail('luxebynie')">LuxeByNia</a></li><li><a href="#" onclick="goToPortDetail('greenleaf')">GreenLeaf</a></li></ul></div>
+      <div class="footer-col"><h4>Contact</h4><ul><li><a href="#">hello@htmart.agency</a></li><li><a href="#">+91 98765 43210</a></li></ul></div>
+    </div>
+    <div class="footer-bottom"><p>© 2025 HT Mart. All rights reserved.</p><div class="footer-socials"><a class="footer-social" href="#">📸</a><a class="footer-social" href="#">💼</a></div></div>
+  </footer>
+</div>
+
+<!-- HealthFirst -->
+<div id="port-healthfirst" class="page port-detail">
+  <div class="port-detail-hero">
+    <a href="#" class="back-btn" onclick="goTo('portfolio')">← Back to Portfolio</a>
+    <h1>HealthFirst — <span>Complete</span><br>Brand Overhaul</h1>
+    <div class="port-detail-meta"><span class="meta-pill"><strong>Category:</strong> Brand Identity · SEO</span><span class="meta-pill"><strong>Duration:</strong> 3 Months</span><span class="meta-pill"><strong>Platform:</strong> Organic · Website</span><span class="meta-pill"><strong>Year:</strong> 2024</span></div>
+    <div class="port-detail-video port-gradient-4"><div class="port-overlay-icon" style="font-size:140px;opacity:.08;">🏥</div><div class="big-play">▶</div><span style="color:rgba(255,255,255,0.5);font-size:13px;position:relative;z-index:2;">Brand Film Placeholder · 1:48</span></div>
+  </div>
+  <div class="port-detail-body">
+    <div class="port-detail-grid">
+      <div class="port-detail-content">
+        <h2>The Challenge</h2>
+        <p>HealthFirst was a healthcare startup with an outdated visual identity that felt clinical and cold. They needed a modern brand that felt approachable and trustworthy — while also ranking on Google for key healthcare terms.</p>
+        <h2>Our Approach</h2>
+        <p>We rebuilt their brand from the ground up — new logo, colour system, typography, and tone of voice. The new visual identity was warm, modern, and human. Alongside the rebrand, we built a comprehensive SEO strategy targeting 200+ healthcare keywords across their service areas.</p>
+        <h2>The Results</h2>
+        <p>The new brand scored significantly higher in user trust surveys. Their website organic traffic grew from 800 to 12,000 monthly visitors in 6 months. 40 keywords now rank on page 1 of Google.</p>
+        <div class="port-more-videos">
+          <h2>Brand Visuals & Film</h2>
+          <div class="port-videos-grid">
+            <div class="mini-video"><div class="mini-video-thumb port-gradient-4"><div class="mini-play">▶</div><span class="mini-video-label">Brand Film · 1:48</span></div><div class="mini-info"><div class="mini-info-title">Full Brand Story</div></div></div>
+            <div class="mini-video"><div class="mini-video-thumb port-gradient-4"><div class="mini-play">▶</div><span class="mini-video-label">Logo Reveal · 0:15</span></div><div class="mini-info"><div class="mini-info-title">Identity Reveal</div></div></div>
+            <div class="mini-video"><div class="mini-video-thumb port-gradient-4"><div class="mini-play">▶</div><span class="mini-video-label">Social Reel · 0:30</span></div><div class="mini-info"><div class="mini-info-title">Launch Campaign</div></div></div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="port-results-card">
+          <h3>Project Results</h3>
+          <div class="result-row"><span class="result-label">Organic Traffic Growth</span><span class="result-value">+1400%</span></div>
+          <div class="result-row"><span class="result-label">Keywords on Page 1</span><span class="result-value">40+</span></div>
+          <div class="result-row"><span class="result-label">Brand Trust Score</span><span class="result-value">↑ 82%</span></div>
+          <div class="result-row"><span class="result-label">Monthly Visitors</span><span class="result-value">12,000</span></div>
+          <div class="result-row"><span class="result-label">Project Duration</span><span class="result-value">3 Months</span></div>
+        </div>
+        <div style="margin-top:16px;text-align:center;"><a href="#" class="btn-primary" style="width:100%;justify-content:center;" onclick="goTo('contact')">Start a Similar Project <span class="arr">→</span></a></div>
+      </div>
+    </div>
+  </div>
+  <footer><div class="footer-top"><div class="footer-brand"><a href="#" class="logo-wrap" onclick="goTo('home')"><div class="logo-icon">HT</div><span class="logo-text">HT<span>Mart</span></span></a><p>New Delhi's creative social media agency.</p></div><div class="footer-col"><h4>Pages</h4><ul><li><a href="#" onclick="goTo('portfolio')">Portfolio</a></li><li><a href="#" onclick="goTo('contact')">Contact</a></li></ul></div><div class="footer-col"><h4>More Work</h4><ul><li><a href="#" onclick="goToPortDetail('fashionx')">FashionX</a></li><li><a href="#" onclick="goToPortDetail('spicelane')">SpiceLane</a></li><li><a href="#" onclick="goToPortDetail('luxebynie')">LuxeByNia</a></li></ul></div><div class="footer-col"><h4>Contact</h4><ul><li><a href="#">hello@htmart.agency</a></li></ul></div></div><div class="footer-bottom"><p>© 2025 HT Mart. All rights reserved.</p></div></footer>
+</div>
+
+<!-- SpiceLane -->
+<div id="port-spicelane" class="page port-detail">
+  <div class="port-detail-hero">
+    <a href="#" class="back-btn" onclick="goTo('portfolio')">← Back to Portfolio</a>
+    <h1>SpiceLane — <span>2M Impressions</span><br>in 2 Weeks</h1>
+    <div class="port-detail-meta"><span class="meta-pill"><strong>Category:</strong> Influencer · Content</span><span class="meta-pill"><strong>Duration:</strong> 2 Weeks</span><span class="meta-pill"><strong>Platform:</strong> Instagram · YouTube</span><span class="meta-pill"><strong>Year:</strong> 2024</span></div>
+    <div class="port-detail-video port-gradient-3"><div class="port-overlay-icon" style="font-size:140px;opacity:.08;">🍕</div><div class="big-play">▶</div><span style="color:rgba(255,255,255,0.5);font-size:13px;position:relative;z-index:2;">Campaign Highlights · 0:59</span></div>
+  </div>
+  <div class="port-detail-body">
+    <div class="port-detail-grid">
+      <div class="port-detail-content">
+        <h2>The Challenge</h2>
+        <p>SpiceLane was launching a new range of regional Indian spice blends and needed massive awareness fast. With a limited budget, they needed smart influencer selection and viral-worthy content.</p>
+        <h2>Our Approach</h2>
+        <p>We identified 40 micro and mid-tier food creators across Instagram and YouTube whose audiences matched SpiceLane's target demographics. We briefed each creator with cooking challenges using the spice blends — organic, authentic content that didn't feel like an ad. We also produced a hero video for paid amplification.</p>
+        <h2>The Results</h2>
+        <p>The campaign generated over 2M organic impressions in just 14 days. Three videos went viral independently. SpiceLane sold out their initial stock within the first week of launch.</p>
+        <div class="port-more-videos"><h2>Creator Content</h2><div class="port-videos-grid"><div class="mini-video"><div class="mini-video-thumb port-gradient-3"><div class="mini-play">▶</div><span class="mini-video-label">Creator #1 · 0:45</span></div><div class="mini-info"><div class="mini-info-title">Cooking Challenge</div></div></div><div class="mini-video"><div class="mini-video-thumb port-gradient-3"><div class="mini-play">▶</div><span class="mini-video-label">Creator #2 · 1:02</span></div><div class="mini-info"><div class="mini-info-title">Recipe Reel</div></div></div><div class="mini-video"><div class="mini-video-thumb port-gradient-3"><div class="mini-play">▶</div><span class="mini-video-label">Hero Video · 0:59</span></div><div class="mini-info"><div class="mini-info-title">Brand Highlight</div></div></div></div></div>
+      </div>
+      <div>
+        <div class="port-results-card">
+          <h3>Campaign Results</h3>
+          <div class="result-row"><span class="result-label">Total Impressions</span><span class="result-value">2M+</span></div>
+          <div class="result-row"><span class="result-label">Creators Activated</span><span class="result-value">40</span></div>
+          <div class="result-row"><span class="result-label">Viral Videos</span><span class="result-value">3</span></div>
+          <div class="result-row"><span class="result-label">Stock Sold Out</span><span class="result-value">7 Days</span></div>
+          <div class="result-row"><span class="result-label">Campaign Duration</span><span class="result-value">2 Weeks</span></div>
+        </div>
+        <div style="margin-top:16px;text-align:center;"><a href="#" class="btn-primary" style="width:100%;justify-content:center;" onclick="goTo('contact')">Start a Similar Project <span class="arr">→</span></a></div>
+      </div>
+    </div>
+  </div>
+  <footer><div class="footer-top"><div class="footer-brand"><a href="#" class="logo-wrap" onclick="goTo('home')"><div class="logo-icon">HT</div><span class="logo-text">HT<span>Mart</span></span></a><p>New Delhi's creative social media agency.</p></div><div class="footer-col"><h4>Pages</h4><ul><li><a href="#" onclick="goTo('portfolio')">Portfolio</a></li><li><a href="#" onclick="goTo('contact')">Contact</a></li></ul></div><div class="footer-col"><h4>More Work</h4><ul><li><a href="#" onclick="goToPortDetail('fashionx')">FashionX</a></li><li><a href="#" onclick="goToPortDetail('luxebynie')">LuxeByNia</a></li><li><a href="#" onclick="goToPortDetail('greenleaf')">GreenLeaf</a></li></ul></div><div class="footer-col"><h4>Contact</h4><ul><li><a href="#">hello@htmart.agency</a></li></ul></div></div><div class="footer-bottom"><p>© 2025 HT Mart. All rights reserved.</p></div></footer>
+</div>
+
+<!-- LuxeByNia -->
+<div id="port-luxebynie" class="page port-detail">
+  <div class="port-detail-hero">
+    <a href="#" class="back-btn" onclick="goTo('portfolio')">← Back to Portfolio</a>
+    <h1>LuxeByNia — <span>₹2Cr Revenue</span><br>in Month One</h1>
+    <div class="port-detail-meta"><span class="meta-pill"><strong>Category:</strong> Performance · Social</span><span class="meta-pill"><strong>Duration:</strong> 30 Days</span><span class="meta-pill"><strong>Platform:</strong> Meta · Instagram</span><span class="meta-pill"><strong>Year:</strong> 2024</span></div>
+    <div class="port-detail-video port-gradient-5"><div class="port-overlay-icon" style="font-size:140px;opacity:.08;">💎</div><div class="big-play">▶</div><span style="color:rgba(255,255,255,0.5);font-size:13px;position:relative;z-index:2;">Launch Campaign · 1:05</span></div>
+  </div>
+  <div class="port-detail-body">
+    <div class="port-detail-grid">
+      <div class="port-detail-content">
+        <h2>The Challenge</h2>
+        <p>LuxeByNia was launching a premium jewellery brand targeting aspirational millennial and Gen-Z women. They needed a launch strategy that built brand prestige while driving immediate sales through paid ads.</p>
+        <h2>Our Approach</h2>
+        <p>We crafted a dual-track strategy — organic content to build brand equity and aesthetic, plus a highly targeted Meta Ads campaign for immediate conversions. All creative was shot in-house by our production team with a luxury editorial aesthetic. We also activated 8 premium lifestyle influencers for launch week.</p>
+        <h2>The Results</h2>
+        <p>First month revenue hit ₹2 crore, significantly exceeding projections. The brand's Instagram reached 15K followers in 30 days with an exceptional 8% engagement rate.</p>
+        <div class="port-more-videos"><h2>Launch Content</h2><div class="port-videos-grid"><div class="mini-video"><div class="mini-video-thumb port-gradient-5"><div class="mini-play">▶</div><span class="mini-video-label">Hero Reel · 0:30</span></div><div class="mini-info"><div class="mini-info-title">Brand Launch Film</div></div></div><div class="mini-video"><div class="mini-video-thumb port-gradient-5"><div class="mini-play">▶</div><span class="mini-video-label">Ad Creative · 0:15</span></div><div class="mini-info"><div class="mini-info-title">Meta Ads — Top Performer</div></div></div><div class="mini-video"><div class="mini-video-thumb port-gradient-5"><div class="mini-play">▶</div><span class="mini-video-label">Influencer · 0:45</span></div><div class="mini-info"><div class="mini-info-title">Influencer Collab</div></div></div></div></div>
+      </div>
+      <div>
+        <div class="port-results-card">
+          <h3>Launch Results</h3>
+          <div class="result-row"><span class="result-label">Month 1 Revenue</span><span class="result-value">₹2Cr</span></div>
+          <div class="result-row"><span class="result-label">ROAS</span><span class="result-value">520%</span></div>
+          <div class="result-row"><span class="result-label">Followers in 30 Days</span><span class="result-value">15K</span></div>
+          <div class="result-row"><span class="result-label">Engagement Rate</span><span class="result-value">8%</span></div>
+          <div class="result-row"><span class="result-label">Influencers Activated</span><span class="result-value">8</span></div>
+        </div>
+        <div style="margin-top:16px;text-align:center;"><a href="#" class="btn-primary" style="width:100%;justify-content:center;" onclick="goTo('contact')">Start a Similar Project <span class="arr">→</span></a></div>
+      </div>
+    </div>
+  </div>
+  <footer><div class="footer-top"><div class="footer-brand"><a href="#" class="logo-wrap" onclick="goTo('home')"><div class="logo-icon">HT</div><span class="logo-text">HT<span>Mart</span></span></a><p>New Delhi's creative social media agency.</p></div><div class="footer-col"><h4>Pages</h4><ul><li><a href="#" onclick="goTo('portfolio')">Portfolio</a></li><li><a href="#" onclick="goTo('contact')">Contact</a></li></ul></div><div class="footer-col"><h4>More Work</h4><ul><li><a href="#" onclick="goToPortDetail('fashionx')">FashionX</a></li><li><a href="#" onclick="goToPortDetail('spicelane')">SpiceLane</a></li><li><a href="#" onclick="goToPortDetail('greenleaf')">GreenLeaf</a></li></ul></div><div class="footer-col"><h4>Contact</h4><ul><li><a href="#">hello@htmart.agency</a></li></ul></div></div><div class="footer-bottom"><p>© 2025 HT Mart. All rights reserved.</p></div></footer>
+</div>
+
+<!-- GreenLeaf -->
+<div id="port-greenleaf" class="page port-detail">
+  <div class="port-detail-hero">
+    <a href="#" class="back-btn" onclick="goTo('portfolio')">← Back to Portfolio</a>
+    <h1>GreenLeaf — <span>D2C Store</span><br>Built from Zero</h1>
+    <div class="port-detail-meta"><span class="meta-pill"><strong>Category:</strong> Web Design · SEO · Brand</span><span class="meta-pill"><strong>Duration:</strong> 4 Months</span><span class="meta-pill"><strong>Platform:</strong> Website · Organic</span><span class="meta-pill"><strong>Year:</strong> 2024</span></div>
+    <div class="port-detail-video port-gradient-2"><div class="port-overlay-icon" style="font-size:140px;opacity:.08;">🌿</div><div class="big-play">▶</div><span style="color:rgba(255,255,255,0.5);font-size:13px;position:relative;z-index:2;">Brand Video · 1:20</span></div>
+  </div>
+  <div class="port-detail-body">
+    <div class="port-detail-grid">
+      <div class="port-detail-content">
+        <h2>The Challenge</h2>
+        <p>GreenLeaf was a sustainable skincare startup with no website, no brand identity, and no digital presence. They needed everything built from scratch — brand, website, and an SEO strategy that would drive long-term organic growth.</p>
+        <h2>Our Approach</h2>
+        <p>We started with brand strategy and visual identity, then built a custom Shopify store designed for conversion. Simultaneously, we developed a content SEO strategy targeting sustainability and skincare keywords with long-form blog content and on-page optimisation.</p>
+        <h2>The Results</h2>
+        <p>By month 3, GreenLeaf was receiving 10,000+ organic visitors per month. Their Shopify store converts at 4.2% — well above the 1-2% industry average. 60+ keywords now rank on Google page 1.</p>
+        <div class="port-more-videos"><h2>Brand & Web Content</h2><div class="port-videos-grid"><div class="mini-video"><div class="mini-video-thumb port-gradient-2"><div class="mini-play">▶</div><span class="mini-video-label">Brand Video · 1:20</span></div><div class="mini-info"><div class="mini-info-title">Brand Story Film</div></div></div><div class="mini-video"><div class="mini-video-thumb port-gradient-2"><div class="mini-play">▶</div><span class="mini-video-label">Product Reel · 0:30</span></div><div class="mini-info"><div class="mini-info-title">Product Launch</div></div></div><div class="mini-video"><div class="mini-video-thumb port-gradient-2"><div class="mini-play">▶</div><span class="mini-video-label">Social Ad · 0:15</span></div><div class="mini-info"><div class="mini-info-title">Paid Creative</div></div></div></div></div>
+      </div>
+      <div>
+        <div class="port-results-card">
+          <h3>Project Results</h3>
+          <div class="result-row"><span class="result-label">Monthly Organic Visitors</span><span class="result-value">10K+</span></div>
+          <div class="result-row"><span class="result-label">Store Conversion Rate</span><span class="result-value">4.2%</span></div>
+          <div class="result-row"><span class="result-label">Page 1 Keywords</span><span class="result-value">60+</span></div>
+          <div class="result-row"><span class="result-label">Time to First Sale</span><span class="result-value">Day 1</span></div>
+          <div class="result-row"><span class="result-label">Project Duration</span><span class="result-value">4 Months</span></div>
+        </div>
+        <div style="margin-top:16px;text-align:center;"><a href="#" class="btn-primary" style="width:100%;justify-content:center;" onclick="goTo('contact')">Start a Similar Project <span class="arr">→</span></a></div>
+      </div>
+    </div>
+  </div>
+  <footer><div class="footer-top"><div class="footer-brand"><a href="#" class="logo-wrap" onclick="goTo('home')"><div class="logo-icon">HT</div><span class="logo-text">HT<span>Mart</span></span></a><p>New Delhi's creative social media agency.</p></div><div class="footer-col"><h4>Pages</h4><ul><li><a href="#" onclick="goTo('portfolio')">Portfolio</a></li><li><a href="#" onclick="goTo('contact')">Contact</a></li></ul></div><div class="footer-col"><h4>More Work</h4><ul><li><a href="#" onclick="goToPortDetail('fashionx')">FashionX</a></li><li><a href="#" onclick="goToPortDetail('luxebynie')">LuxeByNia</a></li><li><a href="#" onclick="goToPortDetail('spicelane')">SpiceLane</a></li></ul></div><div class="footer-col"><h4>Contact</h4><ul><li><a href="#">hello@htmart.agency</a></li></ul></div></div><div class="footer-bottom"><p>© 2025 HT Mart. All rights reserved.</p></div></footer>
+</div>
+
+<script>
+// CURSOR
+const cur=document.getElementById('cursor'),ring=document.getElementById('cursorRing');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cur.style.left=mx+'px';cur.style.top=my+'px';});
+function animRing(){rx+=(mx-rx)*.1;ry+=(my-ry)*.1;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(animRing);}
+animRing();
+document.addEventListener('mouseover',e=>{if(e.target.closest('a,button,.svc-card,.port-card,.port-item,.val-card,.team-card,.testi-card,.stat-box,.play-btn,.port-play,.big-play,.mini-video')){cur.classList.add('hovered');ring.classList.add('hovered');}else{cur.classList.remove('hovered');ring.classList.remove('hovered');}});
+
+// NAVIGATION
+function goTo(pageId){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.getElementById(pageId).classList.add('active');
+  document.querySelectorAll('.nav-link').forEach(l=>l.classList.toggle('active',l.dataset.page===pageId));
+  window.scrollTo({top:0,behavior:'instant'});
+  setTimeout(initReveal,50);
+}
+function goToPortDetail(slug){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.getElementById('port-'+slug).classList.add('active');
+  document.querySelectorAll('.nav-link').forEach(l=>l.classList.remove('active'));
+  window.scrollTo({top:0,behavior:'instant'});
+  setTimeout(initReveal,50);
+}
+
+// MOBILE NAV
+function openMobileNav(){document.getElementById('mobileNav').classList.add('open');}
+function closeMobileNav(){document.getElementById('mobileNav').classList.remove('open');}
+
+// SCROLL NAV
+window.addEventListener('scroll',()=>document.getElementById('mainNav').classList.toggle('scrolled',scrollY>20));
+
+// SCROLL REVEAL
+function initReveal(){
+  const els=document.querySelectorAll('.page.active .reveal:not(.visible)');
+  const obs=new IntersectionObserver((entries)=>{
+    entries.forEach((e,i)=>{if(e.isIntersecting){setTimeout(()=>e.target.classList.add('visible'),i*70);obs.unobserve(e.target);}});
+  },{threshold:0.08});
+  els.forEach(el=>obs.observe(el));
+}
+initReveal();
+
+// PORTFOLIO FILTERS (UI only)
+document.querySelectorAll('.filter-btn').forEach(btn=>{
+  btn.addEventListener('click',()=>{document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));btn.classList.add('active');});
+});
+
+// FORM SUBMIT
+function submitForm(btn){
+  btn.textContent='✓ Message Sent! We\'ll be in touch soon.';
+  btn.style.background='#22c55e';
+  setTimeout(()=>{btn.textContent='Send Message ✦';btn.style.background='';},4000);
+}
+
+// PREVENT DEFAULT on all internal links
+document.querySelectorAll('a[href="#"]').forEach(a=>a.addEventListener('click',e=>e.preventDefault()));
+</script>
+</body>
+</html>

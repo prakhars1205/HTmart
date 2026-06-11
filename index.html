@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HT Mart — Digital Marketing Agency</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles/tokens.css">
+<link rel="stylesheet" href="styles/main.css">
+</head>
+<body>
+
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<!-- MOBILE NAV -->
+<div class="mobile-nav" id="mobileNav">
+  <button class="theme-toggle" id="themeToggleMobile" aria-label="Toggle light and dark theme" title="Toggle theme"><span class="theme-icon">🌙</span></button>
+  <button class="mobile-close" onclick="closeMobileNav()">✕</button>
+  <a href="#" onclick="goTo('home');closeMobileNav()">Home</a>
+  <a href="#" onclick="goTo('services');closeMobileNav()">Services</a>
+  <a href="#" onclick="goTo('portfolio');closeMobileNav()">Portfolio</a>
+  <a href="#" onclick="goTo('about');closeMobileNav()">About</a>
+  <a href="#" onclick="goTo('contact');closeMobileNav()">Contact</a>
+</div>
+
+<!-- NAV -->
+<nav id="mainNav">
+  <a href="#" class="logo-wrap" onclick="goTo('home')">
+    <img src="HTM%20logo.png" alt="HT Mart logo">
+  </a>
+  <div class="nav-right">
+    <ul class="nav-links">
+      <li><a href="#" class="nav-link active" data-page="home" onclick="goTo('home')">Home</a></li>
+      <li><a href="#" class="nav-link" data-page="services" onclick="goTo('services')">Services</a></li>
+      <li><a href="#" class="nav-link" data-page="portfolio" onclick="goTo('portfolio')">Portfolio</a></li>
+      <li><a href="#" class="nav-link" data-page="about" onclick="goTo('about')">About</a></li>
+      <li><a href="#" class="nav-link nav-cta" data-page="contact" onclick="goTo('contact')">Let's Talk →</a></li>
+    </ul>
+    <button class="theme-toggle" id="themeToggle" aria-label="Toggle light and dark theme" title="Toggle theme"><span class="theme-icon">🌙</span></button>
+    <button class="hamburger" onclick="openMobileNav()"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+
+<!-- ===================== HOME ===================== -->
+<div id="home" class="page active">
+  <section class="hero">
+    <div class="hero-left">
+      <div class="hero-badge"><span class="pulse"></span> Digital Marketing Agency</div>
+      <h1>
+        Marketing<br>
+        <span class="highlight">That Builds</span>
+        <span class="stroke">Brands That Sell.</span>
+      </h1>
+      <p class="hero-desc">HT Mart helps brands grow through performance marketing, content production, social media and branding — all under one roof.</p>
+      <div class="hero-actions">
+        <a href="#" class="btn-primary" onclick="goTo('services')">Our Services <span class="arr">→</span></a>
+        <a href="#" class="btn-outline" onclick="goTo('contact')">Start a Project</a>
+      </div>
+    </div>
+    <div class="hero-right">
+      <div class="hero-visual-card">
+        <div class="hero-video-placeholder port-gradient-1">
+          <div class="play-btn" onclick="goTo('about')">▶</div>
+          <span class="hero-video-label">Get to know HT Mart →</span>
+        </div>
+        <div class="hero-card-bottom">
+          <div class="hero-card-meta"><strong>HT Mart</strong>Who We Are</div>
+          <span class="hero-card-tag">▶ Video</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="marquee-wrap">
+    <div class="marquee-track">
+      <div class="marquee-item"><span class="dot">✦</span>Performance Marketing</div>
+      <div class="marquee-item"><span class="dot">✦</span>Content Production</div>
+      <div class="marquee-item"><span class="dot">✦</span>Content Marketing</div>
+      <div class="marquee-item"><span class="dot">✦</span>Social Media Marketing</div>
+      <div class="marquee-item"><span class="dot">✦</span>Branding</div>
+      <div class="marquee-item"><span class="dot">✦</span>Performance Marketing</div>
+      <div class="marquee-item"><span class="dot">✦</span>Content Production</div>
+      <div class="marquee-item"><span class="dot">✦</span>Content Marketing</div>
+      <div class="marquee-item"><span class="dot">✦</span>Social Media Marketing</div>
+      <div class="marquee-item"><span class="dot">✦</span>Branding</div>
+    </div>
+  </div>
+
+  <!-- SERVICES HOME -->
+  <section class="services-home">
+    <div class="services-header">
+      <div>
+        <div class="section-tag">What We Do</div>
+        <h2 class="section-heading">Full-stack digital<br>firepower.</h2>
+      </div>
+      <a href="#" class="btn-outline" onclick="goTo('services')">All Services →</a>
+    </div>
+    <div class="services-home-grid">
+      <div class="svc-card reveal" onclick="goTo('services')">
+        <div class="svc-icon">🎯</div>
+        <h3>Performance Marketing</h3>
+        <p>Data-driven paid campaigns across Meta & Google, engineered for real ROI — not just reach.</p>
+        <div class="svc-arrow">→</div>
+      </div>
+      <div class="svc-card reveal" onclick="goTo('services')">
+        <div class="svc-icon">🎬</div>
+        <h3>Content Production</h3>
+        <p>In-house photo & video production — from concept and shoot days to editing and final delivery.</p>
+        <div class="svc-arrow">→</div>
+      </div>
+      <div class="svc-card reveal" onclick="goTo('services')">
+        <div class="svc-icon">📸</div>
+        <h3>Content Marketing</h3>
+        <p>Strategic video & photo campaigns that tell your brand's story and keep audiences coming back.</p>
+        <div class="svc-arrow">→</div>
+      </div>
+      <div class="svc-card reveal" onclick="goTo('services')">
+        <div class="svc-icon">📱</div>
+        <h3>Social Media Marketing</h3>
+        <p>Platform-native content, community management and growth strategy across every channel.</p>
+        <div class="svc-arrow">→</div>
+      </div>
+      <div class="svc-card reveal" onclick="goTo('services')">
+        <div class="svc-icon">✨</div>
+        <h3>Branding</h3>
+        <p>Visual identity, brand guidelines and tone of voice that make your brand instantly recognizable.</p>
+        <div class="svc-arrow">→</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PORTFOLIO HOME -->
+  <section class="portfolio-home">
+    <div class="portfolio-home-header">
+      <div>
+        <div class="section-tag">Our Work</div>
+        <h2 class="section-heading">The kind of work<br>we love doing.</h2>
+      </div>
+      <a href="#" class="btn-outline" onclick="goTo('portfolio')">View All Work →</a>
+    </div>
+    <p class="portfolio-note">Sample work shown below — case studies coming soon.</p>
+    <div class="portfolio-home-grid">
+      <div class="port-card large reveal">
+        <div class="port-video port-gradient-1">
+          <div class="port-overlay-icon">👗</div>
+          <div class="port-play">▶</div>
+        </div>
+        <div class="port-info">
+          <div class="port-cat">Performance Marketing</div>
+          <div class="port-title">Fashion & Retail Brand — Paid Campaign</div>
+        </div>
+      </div>
+      <div class="port-card reveal">
+        <div class="port-video port-gradient-4">
+          <div class="port-overlay-icon">🏥</div>
+          <div class="port-play">▶</div>
+        </div>
+        <div class="port-info">
+          <div class="port-cat">Branding</div>
+          <div class="port-title">Wellness Brand — Identity Refresh</div>
+        </div>
+      </div>
+      <div class="port-card reveal">
+        <div class="port-video port-gradient-3">
+          <div class="port-overlay-icon">🍕</div>
+          <div class="port-play">▶</div>
+        </div>
+        <div class="port-info">
+          <div class="port-cat">Content Production · Social Media</div>
+          <div class="port-title">Food & Beverage Brand — Content Campaign</div>
+        </div>
+      </div>
+      <div class="port-card reveal">
+        <div class="port-video port-gradient-5">
+          <div class="port-overlay-icon">💎</div>
+          <div class="port-play">▶</div>
+        </div>
+        <div class="port-info">
+          <div class="port-cat">Content Marketing</div>
+          <div class="port-title">Lifestyle Brand — Video & Photo Series</div>
+        </div>
+      </div>
+      <div class="port-card reveal">
+        <div class="port-video port-gradient-2">
+          <div class="port-overlay-icon">🌿</div>
+          <div class="port-play">▶</div>
+        </div>
+        <div class="port-info">
+          <div class="port-cat">Social Media Marketing</div>
+          <div class="port-title">D2C Brand — Social Growth</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS -->
+  <section class="testimonials">
+    <div class="section-tag">Client Love</div>
+    <h2 class="section-heading" style="font-size:clamp(32px,4vw,54px);">What our clients say.</h2>
+    <p class="testi-note">Sample testimonials — to be replaced with real client quotes.</p>
+    <div class="testi-grid">
+      <div class="testi-card reveal">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-text">HT Mart took the time to understand our brand and built a strategy that actually moved the needle. The whole process felt like a true partnership.</p>
+        <div class="testi-author">
+          <div class="testi-avatar">XX</div>
+          <div><div class="testi-name">Client Name</div><div class="testi-role">Founder, [Brand Name]</div></div>
+        </div>
+      </div>
+      <div class="testi-card reveal">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-text">The content quality was a step above anything we'd worked with before — and it actually performed. Our engagement and conversions both improved.</p>
+        <div class="testi-author">
+          <div class="testi-avatar">XX</div>
+          <div><div class="testi-name">Client Name</div><div class="testi-role">Marketing Lead, [Brand Name]</div></div>
+        </div>
+      </div>
+      <div class="testi-card reveal">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-text">From strategy to execution, everything felt considered and on-brand. They don't just execute — they actually think about what's right for us.</p>
+        <div class="testi-author">
+          <div class="testi-avatar">XX</div>
+          <div><div class="testi-name">Client Name</div><div class="testi-role">Owner, [Brand Name]</div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA BANNER -->
+  <div class="cta-banner reveal">
+    <div class="cta-banner-left">
+      <h2>Ready to make your brand impossible to ignore?</h2>
+      <p>Let's build a digital presence that actually moves the needle for your business.</p>
+    </div>
+    <div class="cta-banner-right">
+      <a href="#" class="btn-orange-white" onclick="goTo('contact')">Let's Talk →</a>
+    </div>
+  </div>
+
+  <footer>
+    <div class="footer-top">
+      <div class="footer-brand">
+        <a href="#" class="logo-wrap" onclick="goTo('home')">
+          <img src="HTM%20logo.png" alt="HT Mart logo">
+        </a>
+        <p>We help brands grow through performance marketing, content production, social media and branding — all under one roof.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Pages</h4>
+        <ul>
+          <li><a href="#" onclick="goTo('services')">Services</a></li>
+          <li><a href="#" onclick="goTo('portfolio')">Portfolio</a></li>
+          <li><a href="#" onclick="goTo('about')">About Us</a></li>
+          <li><a href="#" onclick="goTo('contact')">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Services</h4>
+        <ul>
+          <li><a href="#" onclick="goTo('services')">Performance Marketing</a></li>
+          <li><a href="#" onclick="goTo('services')">Content Production</a></li>
+          <li><a href="#" onclick="goTo('services')">Content Marketing</a></li>
+          <li><a href="#" onclick="goTo('services')">Social Media Marketing</a></li>
+          <li><a href="#" onclick="goTo('services')">Branding</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <ul>
+          <li><a href="#">[hello@htmart.com]</a></li>
+          <li><a href="#">[+91 XXXXX XXXXX]</a></li>
+          <li><a href="#">[City, Country]</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2026 HT Mart. All rights reserved.</p>
+      <div class="footer-socials">
+        <a class="footer-social" href="#" title="Instagram">📸</a>
+        <a class="footer-social" href="#" title="LinkedIn">💼</a>
+        <a class="footer-social" href="#" title="X / Twitter">🐦</a>
+        <a class="footer-social" href="#" title="YouTube">▶️</a>
+      </div>
+    </div>
+  </footer>
+</div>
+
+<!-- ===================== SERVICES ===================== -->
+<div id="services" class="page">
+  <div class="page-hero-wrap">
+    <div class="section-tag">Our Services</div>
+    <h1>Everything your brand<br>needs to <span>grow</span> online.</h1>
+    <p>Five services, working together — built for brands that want real growth, not just pretty numbers.</p>
+  </div>
+  <div class="services-detailed">
+    <div class="svc-row reveal">
+      <div>
+        <div class="svc-row-num">01 — Performance Marketing</div>
+        <h2>Ads that earn their keep.</h2>
+        <p>We plan, launch and optimise paid campaigns across Meta and Google — built around clear goals and measured relentlessly. Every rupee is tracked back to results, so you always know what's working.</p>
+        <div class="tags-row"><span class="pill">Meta Ads</span><span class="pill">Google Ads</span><span class="pill">Retargeting</span><span class="pill">Conversion Tracking</span><span class="pill">A/B Testing</span></div>
+      </div>
+      <div class="svc-row-visual">🎯</div>
+    </div>
+    <div class="svc-row flip reveal">
+      <div>
+        <div class="svc-row-num">02 — Content Production</div>
+        <h2>Photo & video, done right.</h2>
+        <p>Our in-house production team handles everything from concept and storyboarding to shoot days, editing and final delivery — so your brand always has fresh, high-quality content ready to go.</p>
+        <div class="tags-row"><span class="pill">Photography</span><span class="pill">Videography</span><span class="pill">Editing</span><span class="pill">Studio & On-Location Shoots</span><span class="pill">Motion Graphics</span></div>
+      </div>
+      <div class="svc-row-visual">🎬</div>
+    </div>
+    <div class="svc-row reveal">
+      <div>
+        <div class="svc-row-num">03 — Content Marketing (Video & Photo)</div>
+        <h2>Content with a strategy behind it.</h2>
+        <p>Great content only works when it's part of a plan. We build content calendars and campaigns around your video and photo assets, so every piece supports your bigger marketing goals.</p>
+        <div class="tags-row"><span class="pill">Content Strategy</span><span class="pill">Editorial Calendars</span><span class="pill">Campaign Planning</span><span class="pill">Repurposing & Distribution</span></div>
+      </div>
+      <div class="svc-row-visual">📸</div>
+    </div>
+    <div class="svc-row flip reveal">
+      <div>
+        <div class="svc-row-num">04 — Social Media Marketing</div>
+        <h2>Social that builds community.</h2>
+        <p>We manage your social presence end to end — platform-native content, consistent posting, community management and growth strategy that turns followers into customers.</p>
+        <div class="tags-row"><span class="pill">Instagram</span><span class="pill">Reels & Shorts</span><span class="pill">LinkedIn</span><span class="pill">Community Management</span><span class="pill">Growth Strategy</span></div>
+      </div>
+      <div class="svc-row-visual">📱</div>
+    </div>
+    <div class="svc-row reveal">
+      <div>
+        <div class="svc-row-num">05 — Branding</div>
+        <h2>Brands with a clear identity.</h2>
+        <p>From logo and colour palette to tone of voice and brand guidelines, we build visual identities that feel consistent and memorable across every touchpoint.</p>
+        <div class="tags-row"><span class="pill">Logo Design</span><span class="pill">Brand Guidelines</span><span class="pill">Visual Identity</span><span class="pill">Tone of Voice</span></div>
+      </div>
+      <div class="svc-row-visual">✨</div>
+    </div>
+  </div>
+  <div class="cta-banner reveal" style="margin:0 56px 80px;">
+    <div class="cta-banner-left">
+      <h2>Not sure which service fits? Let's figure it out together.</h2>
+      <p>A quick chat is all it takes to build the right strategy for your brand.</p>
+    </div>
+    <div class="cta-banner-right"><a href="#" class="btn-orange-white" onclick="goTo('contact')">Book a Free Call →</a></div>
+  </div>
+  <footer>
+    <div class="footer-top">
+      <div class="footer-brand"><a href="#" class="logo-wrap" onclick="goTo('home')"><img src="HTM%20logo.png" alt="HT Mart logo"></a><p>We help brands grow through performance marketing, content production, social media and branding.</p></div>
+      <div class="footer-col"><h4>Pages</h4><ul><li><a href="#" onclick="goTo('services')">Services</a></li><li><a href="#" onclick="goTo('portfolio')">Portfolio</a></li><li><a href="#" onclick="goTo('about')">About Us</a></li><li><a href="#" onclick="goTo('contact')">Contact</a></li></ul></div>
+      <div class="footer-col"><h4>Services</h4><ul><li><a href="#" onclick="goTo('services')">Performance Marketing</a></li><li><a href="#" onclick="goTo('services')">Content Production</a></li><li><a href="#" onclick="goTo('services')">Content Marketing</a></li><li><a href="#" onclick="goTo('services')">Social Media Marketing</a></li><li><a href="#" onclick="goTo('services')">Branding</a></li></ul></div>
+      <div class="footer-col"><h4>Contact</h4><ul><li><a href="#">[hello@htmart.com]</a></li><li><a href="#">[+91 XXXXX XXXXX]</a></li><li><a href="#">[City, Country]</a></li></ul></div>
+    </div>
+    <div class="footer-bottom"><p>© 2026 HT Mart. All rights reserved.</p><div class="footer-socials"><a class="footer-social" href="#" title="Instagram">📸</a><a class="footer-social" href="#" title="LinkedIn">💼</a><a class="footer-social" href="#" title="X / Twitter">🐦</a><a class="footer-social" href="#" title="YouTube">▶️</a></div></div>
+  </footer>
+</div>
+
+<!-- ===================== PORTFOLIO ===================== -->
+<div id="portfolio" class="page">
+  <div class="page-hero-wrap">
+    <div class="section-tag">Our Work</div>
+    <h1>Where strategy<br>meets <span>execution.</span></h1>
+    <p>A look at the kind of campaigns, content and brand work we love doing. Real case studies coming soon.</p>
+  </div>
+  <div class="portfolio-filters">
+    <button class="filter-btn active">All</button>
+    <button class="filter-btn">Performance Marketing</button>
+    <button class="filter-btn">Content Production</button>
+    <button class="filter-btn">Content Marketing</button>
+    <button class="filter-btn">Social Media Marketing</button>
+    <button class="filter-btn">Branding</button>
+  </div>
+  <div class="portfolio-masonry">
+    <div class="port-item span2 reveal">
+      <div class="port-video-thumb port-gradient-1" style="min-height:280px;">
+        <div class="port-overlay-icon">👗</div>
+        <div class="port-play">▶</div>
+        <span class="port-video-label">Sample Campaign</span>
+      </div>
+      <div class="port-item-info">
+        <div class="port-item-cat">Performance Marketing · Social Media Marketing</div>
+        <div class="port-item-title">Fashion & Retail Brand — Paid Campaign</div>
+        <div class="port-item-desc">An end-to-end paid social campaign concept for a fashion D2C brand.</div>
+      </div>
+    </div>
+    <div class="port-item reveal">
+      <div class="port-video-thumb port-gradient-4">
+        <div class="port-overlay-icon">🏥</div>
+        <div class="port-play">▶</div>
+        <span class="port-video-label">Sample Project</span>
+      </div>
+      <div class="port-item-info">
+        <div class="port-item-cat">Branding</div>
+        <div class="port-item-title">Wellness Brand — Identity Refresh</div>
+        <div class="port-item-desc">A new visual identity and brand guidelines for a healthcare/wellness brand.</div>
+      </div>
+    </div>
+    <div class="port-item reveal">
+      <div class="port-video-thumb port-gradient-3">
+        <div class="port-overlay-icon">🍕</div>
+        <div class="port-play">▶</div>
+        <span class="port-video-label">Sample Content</span>
+      </div>
+      <div class="port-item-info">
+        <div class="port-item-cat">Content Production · Social Media Marketing</div>
+        <div class="port-item-title">Food & Beverage Brand — Content Campaign</div>
+        <div class="port-item-desc">Photo and video content created for a food brand's social channels.</div>
+      </div>
+    </div>
+    <div class="port-item reveal">
+      <div class="port-video-thumb port-gradient-5">
+        <div class="port-overlay-icon">💎</div>
+        <div class="port-play">▶</div>
+        <span class="port-video-label">Sample Series</span>
+      </div>
+      <div class="port-item-info">
+        <div class="port-item-cat">Content Marketing</div>
+        <div class="port-item-title">Lifestyle Brand — Video & Photo Series</div>
+        <div class="port-item-desc">A content marketing concept built around a recurring video & photo series.</div>
+      </div>
+    </div>
+    <div class="port-item span2 reveal">
+      <div class="port-video-thumb port-gradient-2" style="min-height:240px;">
+        <div class="port-overlay-icon">🌿</div>
+        <div class="port-play">▶</div>
+        <span class="port-video-label">Sample Strategy</span>
+      </div>
+      <div class="port-item-info">
+        <div class="port-item-cat">Social Media Marketing · Branding</div>
+        <div class="port-item-title">D2C Brand — Social Growth</div>
+        <div class="port-item-desc">A social-first growth strategy concept for a sustainable D2C brand.</div>
+      </div>
+    </div>
+  </div>
+  <footer>
+    <div class="footer-top">
+      <div class="footer-brand"><a href="#" class="logo-wrap" onclick="goTo('home')"><img src="HTM%20logo.png" alt="HT Mart logo"></a><p>We help brands grow through performance marketing, content production, social media and branding.</p></div>
+      <div class="footer-col"><h4>Pages</h4><ul><li><a href="#" onclick="goTo('services')">Services</a></li><li><a href="#" onclick="goTo('portfolio')">Portfolio</a></li><li><a href="#" onclick="goTo('about')">About</a></li><li><a href="#" onclick="goTo('contact')">Contact</a></li></ul></div>
+      <div class="footer-col"><h4>Services</h4><ul><li><a href="#" onclick="goTo('services')">Performance Marketing</a></li><li><a href="#" onclick="goTo('services')">Content Production</a></li><li><a href="#" onclick="goTo('services')">Content Marketing</a></li><li><a href="#" onclick="goTo('services')">Social Media Marketing</a></li><li><a href="#" onclick="goTo('services')">Branding</a></li></ul></div>
+      <div class="footer-col"><h4>Contact</h4><ul><li><a href="#">[hello@htmart.com]</a></li><li><a href="#">[+91 XXXXX XXXXX]</a></li><li><a href="#">[City, Country]</a></li></ul></div>
+    </div>
+    <div class="footer-bottom"><p>© 2026 HT Mart. All rights reserved.</p><div class="footer-socials"><a class="footer-social" href="#" title="Instagram">📸</a><a class="footer-social" href="#" title="LinkedIn">💼</a><a class="footer-social" href="#" title="X / Twitter">🐦</a><a class="footer-social" href="#" title="YouTube">▶️</a></div></div>
+  </footer>
+</div>
+
+<!-- ===================== ABOUT ===================== -->
+<div id="about" class="page">
+  <div class="about-intro">
+    <div class="reveal">
+      <div class="section-tag">About HT Mart</div>
+      <h1>We help brands<br><em>show up & sell.</em></h1>
+    </div>
+    <div class="reveal">
+      <div class="about-intro-right">
+        <p>HT Mart is a digital marketing agency built for brands that want more than just likes — we focus on strategy, content and performance working together.</p>
+        <p>From paid campaigns to photo and video production, social media management to brand identity — our team handles it all under one roof.</p>
+        <p>We work closely with every client to build a marketing approach tailored to their goals, audience and budget.</p>
+        <div class="about-highlights">
+          <div class="about-highlight-box"><div class="about-highlight-icon">🎯</div><div class="about-highlight-label">Performance-Driven</div><div class="about-highlight-sub">Every campaign built around measurable goals</div></div>
+          <div class="about-highlight-box"><div class="about-highlight-icon">🎬</div><div class="about-highlight-label">In-House Production</div><div class="about-highlight-sub">Photo & video shot and edited by our team</div></div>
+          <div class="about-highlight-box"><div class="about-highlight-icon">🤝</div><div class="about-highlight-label">Full-Service Team</div><div class="about-highlight-sub">Strategy, content & marketing in one place</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="values-wrap">
+    <div class="section-tag">What We Stand For</div>
+    <h2 class="section-heading" style="font-size:clamp(32px,4vw,54px);">Values that drive<br>everything we do.</h2>
+    <div class="values-grid">
+      <div class="val-card reveal"><div class="val-icon">⚡</div><h4>Move Fast</h4><p>We stay ahead of trends and platform changes instead of reacting late.</p></div>
+      <div class="val-card reveal"><div class="val-icon">💡</div><h4>Strategy First</h4><p>Every piece of content and every campaign starts with a clear plan.</p></div>
+      <div class="val-card reveal"><div class="val-icon">📊</div><h4>Data-Backed</h4><p>We track what matters and use it to keep improving, not guessing.</p></div>
+      <div class="val-card reveal"><div class="val-icon">🤝</div><h4>Real Partnership</h4><p>We treat your brand's growth like it's our own.</p></div>
+      <div class="val-card reveal"><div class="val-icon">🎨</div><h4>Quality Content</h4><p>If it's not good enough to share, it doesn't go out.</p></div>
+      <div class="val-card reveal"><div class="val-icon">✨</div><h4>Consistent Branding</h4><p>Every touchpoint should feel like the same brand.</p></div>
+    </div>
+  </div>
+
+  <div class="team-wrap">
+    <div class="section-tag">The Team</div>
+    <h2 class="section-heading" style="font-size:clamp(32px,4vw,54px);">The people behind<br>the work.</h2>
+    <p class="team-note">Team photos & bios coming soon.</p>
+    <div class="team-grid">
+      <div class="team-card reveal"><div class="team-photo">👤</div><div class="team-info"><h4>Founder & Strategy Lead</h4><span>Photo & bio coming soon</span></div></div>
+      <div class="team-card reveal"><div class="team-photo">👤</div><div class="team-info"><h4>Performance Marketing Lead</h4><span>Photo & bio coming soon</span></div></div>
+      <div class="team-card reveal"><div class="team-photo">👤</div><div class="team-info"><h4>Content & Production Lead</h4><span>Photo & bio coming soon</span></div></div>
+      <div class="team-card reveal"><div class="team-photo">👤</div><div class="team-info"><h4>Social Media Lead</h4><span>Photo & bio coming soon</span></div></div>
+    </div>
+  </div>
+  <div class="cta-banner reveal" style="margin:0 56px 80px;">
+    <div class="cta-banner-left"><h2>Want to work with this team?</h2><p>Let's have a real conversation about your brand and what's possible.</p></div>
+    <div class="cta-banner-right"><a href="#" class="btn-orange-white" onclick="goTo('contact')">Get in Touch →</a></div>
+  </div>
+  <footer>
+    <div class="footer-top">
+      <div class="footer-brand"><a href="#" class="logo-wrap" onclick="goTo('home')"><img src="HTM%20logo.png" alt="HT Mart logo"></a><p>We help brands grow through performance marketing, content production, social media and branding.</p></div>
+      <div class="footer-col"><h4>Pages</h4><ul><li><a href="#" onclick="goTo('services')">Services</a></li><li><a href="#" onclick="goTo('portfolio')">Portfolio</a></li><li><a href="#" onclick="goTo('about')">About</a></li><li><a href="#" onclick="goTo('contact')">Contact</a></li></ul></div>
+      <div class="footer-col"><h4>Services</h4><ul><li><a href="#" onclick="goTo('services')">Performance Marketing</a></li><li><a href="#" onclick="goTo('services')">Content Production</a></li><li><a href="#" onclick="goTo('services')">Content Marketing</a></li><li><a href="#" onclick="goTo('services')">Social Media Marketing</a></li><li><a href="#" onclick="goTo('services')">Branding</a></li></ul></div>
+      <div class="footer-col"><h4>Contact</h4><ul><li><a href="#">[hello@htmart.com]</a></li><li><a href="#">[+91 XXXXX XXXXX]</a></li><li><a href="#">[City, Country]</a></li></ul></div>
+    </div>
+    <div class="footer-bottom"><p>© 2026 HT Mart. All rights reserved.</p><div class="footer-socials"><a class="footer-social" href="#" title="Instagram">📸</a><a class="footer-social" href="#" title="LinkedIn">💼</a><a class="footer-social" href="#" title="X / Twitter">🐦</a><a class="footer-social" href="#" title="YouTube">▶️</a></div></div>
+  </footer>
+</div>
+
+<!-- ===================== CONTACT ===================== -->
+<div id="contact" class="page">
+  <div class="contact-wrap">
+    <div class="contact-left reveal">
+      <div class="section-tag">Get In Touch</div>
+      <h1>Let's build<br>something <span>great.</span></h1>
+      <p>Got a brief, an idea, or just a feeling that your brand needs a glow-up? We'd love to hear it. Drop us a message and we'll get back to you soon.</p>
+      <div class="contact-detail"><div class="c-icon">📍</div><div class="c-text"><strong>[City, Country]</strong><span>Serving clients [locally / globally]</span></div></div>
+      <div class="contact-detail"><div class="c-icon">📧</div><div class="c-text"><strong>[hello@htmart.com]</strong><span>Response within 24-48 hrs</span></div></div>
+      <div class="contact-detail"><div class="c-icon">📞</div><div class="c-text"><strong>[+91 XXXXX XXXXX]</strong><span>[Business hours]</span></div></div>
+      <div class="contact-socials">
+        <a class="c-social" href="#" title="Instagram">📸</a>
+        <a class="c-social" href="#" title="LinkedIn">💼</a>
+        <a class="c-social" href="#" title="X / Twitter">🐦</a>
+        <a class="c-social" href="#" title="YouTube">▶️</a>
+      </div>
+    </div>
+    <div class="contact-form reveal">
+      <div class="form-row">
+        <div class="f-group"><label for="firstName">First Name</label><input id="firstName" type="text" class="f-control" placeholder="Rahul"></div>
+        <div class="f-group"><label for="lastName">Last Name</label><input id="lastName" type="text" class="f-control" placeholder="Gupta"></div>
+      </div>
+      <div class="f-group"><label for="email">Email Address</label><input id="email" type="email" class="f-control" placeholder="rahul@yourbrand.com"></div>
+      <div class="f-group"><label for="company">Brand / Company</label><input id="company" type="text" class="f-control" placeholder="Your Brand Name"></div>
+      <div class="f-group"><label for="service">Service Needed</label>
+        <select id="service" class="f-control">
+          <option value="">Select a service...</option>
+          <option>Performance Marketing</option>
+          <option>Content Production</option>
+          <option>Content Marketing (Video & Photo)</option>
+          <option>Social Media Marketing</option>
+          <option>Branding</option>
+          <option>Full Package — Everything!</option>
+        </select>
+      </div>
+      <div class="f-group"><label for="message">Tell Us More</label><textarea id="message" class="f-control" placeholder="Tell us about your brand, your goals, and what you want to achieve..."></textarea></div>
+      <button class="f-submit" onclick="submitForm(this)">Send Message ✦</button>
+    </div>
+  </div>
+  <footer>
+    <div class="footer-top">
+      <div class="footer-brand"><a href="#" class="logo-wrap" onclick="goTo('home')"><img src="HTM%20logo.png" alt="HT Mart logo"></a><p>We help brands grow through performance marketing, content production, social media and branding.</p></div>
+      <div class="footer-col"><h4>Pages</h4><ul><li><a href="#" onclick="goTo('services')">Services</a></li><li><a href="#" onclick="goTo('portfolio')">Portfolio</a></li><li><a href="#" onclick="goTo('about')">About</a></li><li><a href="#" onclick="goTo('contact')">Contact</a></li></ul></div>
+      <div class="footer-col"><h4>Services</h4><ul><li><a href="#" onclick="goTo('services')">Performance Marketing</a></li><li><a href="#" onclick="goTo('services')">Content Production</a></li><li><a href="#" onclick="goTo('services')">Content Marketing</a></li><li><a href="#" onclick="goTo('services')">Social Media Marketing</a></li><li><a href="#" onclick="goTo('services')">Branding</a></li></ul></div>
+      <div class="footer-col"><h4>Contact</h4><ul><li><a href="#">[hello@htmart.com]</a></li><li><a href="#">[+91 XXXXX XXXXX]</a></li><li><a href="#">[City, Country]</a></li></ul></div>
+    </div>
+    <div class="footer-bottom"><p>© 2026 HT Mart. All rights reserved.</p><div class="footer-socials"><a class="footer-social" href="#" title="Instagram">📸</a><a class="footer-social" href="#" title="LinkedIn">💼</a><a class="footer-social" href="#" title="X / Twitter">🐦</a><a class="footer-social" href="#" title="YouTube">▶️</a></div></div>
+  </footer>
+</div>
+
+<script src="js/main.js"></script>
+</body>
+</html>
