@@ -115,11 +115,50 @@ document.querySelectorAll('.filter-btn').forEach(btn => {
 });
 
 // CONTACT FORM SUBMIT
-function submitForm(btn) {
+async function submitForm(btn) {
+  const firstName = document.getElementById('firstName').value.trim();
+  const lastName = document.getElementById('lastName').value.trim();
+  const email = document.getElementById('email').value.trim();
+  const company = document.getElementById('company').value.trim();
+  const service = document.getElementById('service').value;
+  const message = document.getElementById('message').value.trim();
+
+  if (!firstName || !email || !message) {
+    alert('Please fill in your name, email, and message.');
+    return;
+  }
+
+  btn.disabled = true;
+  const originalText = btn.textContent;
+  btn.textContent = 'Sending...';
+
+  const { error } = await supabaseClient.from('inquiries').insert({
+    first_name: firstName,
+    last_name: lastName,
+    email,
+    company,
+    service,
+    message,
+  });
+
+  btn.disabled = false;
+
+  if (error) {
+    btn.textContent = originalText;
+    alert('Sorry, something went wrong. Please try again or email us directly.');
+    return;
+  }
+
   btn.textContent = '✓ Message Sent! We\'ll be in touch soon.';
   btn.classList.add('success');
+  document.getElementById('firstName').value = '';
+  document.getElementById('lastName').value = '';
+  document.getElementById('email').value = '';
+  document.getElementById('company').value = '';
+  document.getElementById('service').value = '';
+  document.getElementById('message').value = '';
   setTimeout(() => {
-    btn.textContent = 'Send Message ✦';
+    btn.textContent = originalText;
     btn.classList.remove('success');
   }, 4000);
 }

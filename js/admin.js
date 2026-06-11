@@ -256,6 +256,60 @@ async function renderSettings() {
   });
 }
 
+async function renderMessages() {
+  const container = document.getElementById('section-messages');
+  const { data, error } = await supabaseClient
+    .from('inquiries')
+    .select('*')
+    .order('created_at', { ascending: false });
+  if (error) {
+    container.innerHTML = `<h2>Messages</h2><p class="admin-error">${escapeHtml(error.message)}</p>`;
+    return;
+  }
+
+  let html = `<h2>Messages</h2>`;
+  if (!data.length) {
+    html += `<p class="admin-hint">No messages yet. Submissions from your website's contact form will show up here.</p>`;
+  }
+
+  data.forEach(m => {
+    const when = m.created_at ? new Date(m.created_at).toLocaleString() : '';
+    html += `<div class="admin-card ${m.is_read ? '' : 'admin-card-unread'}">
+      <div class="admin-msg-head">
+        <strong>${escapeHtml(m.first_name || '')} ${escapeHtml(m.last_name || '')}</strong>
+        <span class="admin-msg-date">${escapeHtml(when)}</span>
+      </div>
+      <p class="admin-msg-meta">
+        ${escapeHtml(m.email || '')}${m.company ? ' · ' + escapeHtml(m.company) : ''}${m.service ? ' · ' + escapeHtml(m.service) : ''}
+      </p>
+      <p class="admin-msg-text">${escapeHtml(m.message || '')}</p>
+      <div class="admin-card-actions">
+        ${m.is_read ? '' : `<button type="button" class="f-submit admin-mark-read-btn" data-id="${m.id}">Mark as Read</button>`}
+        <button type="button" class="admin-delete-btn" data-id="${m.id}">Delete</button>
+      </div>
+    </div>`;
+  });
+
+  container.innerHTML = html;
+
+  container.querySelectorAll('.admin-mark-read-btn').forEach(btn => {
+    btn.addEventListener('click', async () => {
+      const { error } = await supabaseClient.from('inquiries').update({ is_read: true }).eq('id', btn.dataset.id);
+      if (error) { alert(error.message); return; }
+      renderMessages();
+    });
+  });
+
+  container.querySelectorAll('.admin-delete-btn').forEach(btn => {
+    btn.addEventListener('click', async () => {
+      if (!confirm('Delete this message? This cannot be undone.')) return;
+      const { error } = await supabaseClient.from('inquiries').delete().eq('id', btn.dataset.id);
+      if (error) { alert(error.message); return; }
+      renderMessages();
+    });
+  });
+}
+
 async function renderUsers() {
   const container = document.getElementById('section-users');
   const { data, error } = await supabaseClient.from('profiles').select('*').order('email');
@@ -294,6 +348,7 @@ function loadAllSections() {
   renderTable('portfolio');
   renderTable('testimonials');
   renderTable('team');
+  renderMessages();
   renderSettings();
   renderUsers();
 }

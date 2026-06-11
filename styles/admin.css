@@ -114,6 +114,13 @@ input[type="file"].f-control{padding:10px;cursor:pointer;}
 }
 .admin-delete-btn:hover{background:var(--error);color:var(--white);}
 
+/* MESSAGES */
+.admin-card-unread{border-color:var(--orange);}
+.admin-msg-head{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:6px;flex-wrap:wrap;}
+.admin-msg-date{font-size:12px;color:var(--muted);}
+.admin-msg-meta{font-size:13px;color:var(--muted);margin-bottom:12px;}
+.admin-msg-text{font-size:14px;line-height:1.7;white-space:pre-wrap;margin-bottom:8px;}
+
 @media(max-width:760px){
   .admin-dashboard{flex-direction:column;}
   .admin-sidebar{width:100%;height:auto;position:static;flex-direction:row;flex-wrap:wrap;align-items:center;gap:12px;}
