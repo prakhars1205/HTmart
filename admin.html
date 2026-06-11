@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>HT Mart — Admin</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles/tokens.css">
+<link rel="stylesheet" href="styles/admin.css">
+</head>
+<body>
+
+<!-- LOGIN VIEW -->
+<div id="loginView" class="admin-login">
+  <div class="admin-login-card">
+    <img src="HTM%20logo.png" alt="HT Mart logo" class="admin-logo">
+    <h1>Admin Login</h1>
+    <div class="f-group"><label for="loginEmail">Email</label><input id="loginEmail" type="email" class="f-control" autocomplete="username"></div>
+    <div class="f-group"><label for="loginPassword">Password</label><input id="loginPassword" type="password" class="f-control" autocomplete="current-password"></div>
+    <button class="f-submit" id="loginBtn" style="width:100%;">Log In</button>
+    <p class="admin-error" id="loginError"></p>
+  </div>
+</div>
+
+<!-- DASHBOARD VIEW -->
+<div id="dashboardView" class="admin-dashboard hidden">
+  <aside class="admin-sidebar">
+    <div>
+      <img src="HTM%20logo.png" alt="HT Mart logo" class="admin-logo-small">
+      <nav>
+        <button class="admin-nav-btn active" data-section="services">Services</button>
+        <button class="admin-nav-btn" data-section="portfolio">Portfolio</button>
+        <button class="admin-nav-btn" data-section="testimonials">Testimonials</button>
+        <button class="admin-nav-btn" data-section="team">Team</button>
+        <button class="admin-nav-btn" data-section="settings">Site Settings</button>
+        <button class="admin-nav-btn hidden" data-section="users" id="usersNavBtn">Users</button>
+      </nav>
+    </div>
+    <div class="admin-user-info">
+      <span id="currentUserEmail"></span>
+      <span id="currentUserRole" class="admin-role-badge"></span>
+      <button id="logoutBtn">Log Out</button>
+    </div>
+  </aside>
+  <main class="admin-main">
+    <section id="section-services" class="admin-section active"></section>
+    <section id="section-portfolio" class="admin-section"></section>
+    <section id="section-testimonials" class="admin-section"></section>
+    <section id="section-team" class="admin-section"></section>
+    <section id="section-settings" class="admin-section"></section>
+    <section id="section-users" class="admin-section"></section>
+  </main>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="js/supabase-config.js"></script>
+<script src="js/admin.js"></script>
+</body>
+</html>
