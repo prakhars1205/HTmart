@@ -277,7 +277,7 @@ nav.scrolled{box-shadow:0 2px 24px rgba(0,0,0,0.2);}
 .portfolio-home{padding:0 56px 100px;}
 .portfolio-home-header{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:48px;flex-wrap:wrap;gap:24px;}
 .portfolio-home-header .section-heading{font-size:clamp(36px,4vw,58px);}
-.portfolio-note{color:var(--muted);font-size:13px;font-style:italic;margin:-32px 0 32px;}
+.portfolio-note{color:var(--muted);font-size:13px;font-style:italic;margin:8px 0 32px;}
 
 .portfolio-home-grid{display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:auto auto;gap:20px;}
 
@@ -330,7 +330,7 @@ nav.scrolled{box-shadow:0 2px 24px rgba(0,0,0,0.2);}
 
 /* TESTIMONIALS */
 .testimonials{padding:0 56px 100px;}
-.testimonials .testi-note{color:var(--muted);font-size:13px;font-style:italic;margin:-32px 0 32px;}
+.testimonials .testi-note{color:var(--muted);font-size:13px;font-style:italic;margin:8px 0 32px;}
 .testi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:52px;}
 .testi-card{
   background:var(--card);
@@ -506,7 +506,7 @@ footer{
 .val-card p{color:var(--muted);font-size:13px;line-height:1.75;}
 
 .team-wrap{padding:0 56px 100px;}
-.team-wrap .team-note{color:var(--muted);font-size:13px;font-style:italic;margin:-32px 0 32px;}
+.team-wrap .team-note{color:var(--muted);font-size:13px;font-style:italic;margin:8px 0 32px;}
 .team-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;margin-top:52px;}
 .team-card{
   background:var(--card);border-radius:20px;
